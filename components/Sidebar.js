@@ -17,7 +17,6 @@ const Sidebar = () => {
       <div className="flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24">
         <Image
           src={"/twouitteur-white.svg"}
-          style={""}
           width={30}
           height={30}
           alt={"twouitteur logo"}
@@ -39,7 +38,7 @@ const Sidebar = () => {
       <div className="text-[#d9d9d9] flex items-center justify-center mt-auto mb-3 hoverAnimation xl:justify-between xl:ml-auto">
         <Image
           src={"/default-avatar.svg"}
-          alt=""
+          alt="Your avatar"
           className="rounded-full"
           width={30}
           height={30}
