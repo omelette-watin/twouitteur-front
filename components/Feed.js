@@ -8,7 +8,11 @@ const Feed = () => {
           <SparklesIcon className="h-5 text-white" />
         </div>
       </div>
-      <div>feed</div>
+      {/* <TweetBox /> */}
+      <div>
+        feed
+        {/* <Post /> */}
+      </div>
     </div>
   )
 }
