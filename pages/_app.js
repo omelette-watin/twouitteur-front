@@ -40,7 +40,7 @@ const App = ({ Component, pageProps }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user }}>
       <Component {...pageProps} />
     </AuthContext.Provider>
   )

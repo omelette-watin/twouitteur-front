@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-black;
+    @apply bg-neutral-900;
   }
 }
 
@@ -20,4 +20,21 @@
   .tag {
     @apply text-[#1d9bf0] font-normal hover:underline cursor-pointer;
   }
+}
+
+.fadeUp {
+  animation-name: fadeUp;
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(.65,.39,.45,.85);
+}
+
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(-150%);
+  }
+  to {
+    transform: translateY(0);
+  }
+
 }
