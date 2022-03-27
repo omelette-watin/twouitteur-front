@@ -24,7 +24,7 @@
 
 .fadeUp {
   animation-name: fadeUp;
-  animation-duration: 1.5s;
+  animation-duration: 1.2s;
   animation-timing-function: cubic-bezier(.65,.39,.45,.85);
 }
 
