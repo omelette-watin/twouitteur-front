@@ -16,10 +16,10 @@ const App = ({ Component, pageProps }) => {
 
       if (token) {
         try {
-          const me = await api.get("/user/me")
+          const { data } = await api.get("/user/me")
 
-          if (me) {
-            setUser(me)
+          if (data) {
+            setUser(data)
             setLoading(false)
           }
         } catch (e) {
@@ -41,7 +41,7 @@ const App = ({ Component, pageProps }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user }}>
+    <AuthContext.Provider value={user}>
       <Component {...pageProps} />
     </AuthContext.Provider>
   )
