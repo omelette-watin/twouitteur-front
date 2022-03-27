@@ -1,6 +1,6 @@
 import "../styles/globals.css"
 import { useEffect, useState } from "react"
-import Loading from "../components/Loading"
+import LoadingPage from "../components/LoadingPage"
 import api from "../services/api"
 import { AuthContext } from "../contexts/auth"
 import ConnectionScreen from "../components/ConnectionScreen"
@@ -12,6 +12,7 @@ const App = ({ Component, pageProps }) => {
   useEffect(() => {
     ;(async () => {
       const token = localStorage.getItem("token")
+      api.defaults.headers["x-access-token"] = token
 
       if (token) {
         try {
@@ -32,7 +33,7 @@ const App = ({ Component, pageProps }) => {
   }, [])
 
   if (loading) {
-    return <Loading />
+    return <LoadingPage />
   }
 
   if (!user && pageProps.protected) {

@@ -27,7 +27,7 @@ const ConnectionScreen = () => {
               </button>
             </a>
           </Link>
-          <div className="text-l">Pas encore de compte ?</div>
+          <div className="text-l">Don't have an account?</div>
           <Link href={"/register"}>
             <a>
               <button className="block bg-white text-black rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-slate-300 hover:scale-95 transition duration-200 ease-out">

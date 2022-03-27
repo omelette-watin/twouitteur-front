@@ -2,12 +2,30 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import GalaxyBg from "../components/GalaxyBg"
+import Loading from "../components/Loading"
+import api from "../services/api"
 
 const Login = () => {
   const [password, setPassword] = useState("")
   const [username, setUsername] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState(null)
   const handleSubmit = (e) => {
     e.preventDefault()
+    setSubmitting(true)
+
+    api
+      .post("/auth/login", { username, password })
+      .then(({ data }) => {
+        const token = data.user.token
+        localStorage.setItem("token", token)
+        window.location.pathname = "/"
+      })
+      .catch((err) => {
+        setPassword("")
+        setError(err.response.data.message || err.message)
+        setSubmitting(false)
+      })
   }
 
   return (
@@ -43,16 +61,26 @@ const Login = () => {
                 setPassword(e.target.value)
               }}
             />
+            {error && (
+              <p className={"text-red-600 text-center bounce"}>{error}</p>
+            )}
           </div>
 
           <div className="space-y-3 flex flex-col items-center text-white py-8">
             <button
               className="block bg-[#1d9bf0] rounded-full w-52 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8] hover:scale-95 transition duration-200 ease-out"
               type="submit"
+              disabled={submitting}
             >
-              Sign-in
+              {submitting ? (
+                <span>
+                  Sending ... <Loading color={"white"} size={5} />
+                </span>
+              ) : (
+                "Sign-in"
+              )}
             </button>
-            <div className="text-l">Pas encore de compte ?</div>
+            <div className="text-l">Don't have an account?</div>
             <Link href={"/register"}>
               <a>
                 <button className="block bg-white text-black rounded-full w-48 h-[52px] text-lg font-bold shadow-md hover:bg-slate-300 hover:scale-95 transition duration-200 ease-out">
