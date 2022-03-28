@@ -36,7 +36,7 @@ const registerSchema = object({
     .required("Required")
     .oneOf([ref("password")], "Passwords must match"),
 })
-const Input = (props) => {
+export const Input = (props) => {
   const [field, meta] = useField(props)
   const [didFocus, setDidFocus] = useState(false)
   const handleFocus = () => setDidFocus(true)
