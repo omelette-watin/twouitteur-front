@@ -14,7 +14,7 @@ const Login = () => {
   return (
     <GalaxyBg>
       <Head>
-        <title>Log in - Twouitteur</title>
+        <title>Sign in - Twouitteur</title>
       </Head>
       <div className="flex flex-col items-center justify-center space-y-6 text-white bg-neutral-900 rounded-lg px-8 pt-8 pb-2 shadow-md fadeUp">
         <Image

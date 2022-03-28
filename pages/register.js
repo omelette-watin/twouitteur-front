@@ -88,7 +88,7 @@ const Register = () => {
     <GalaxyBg>
       <div className="flex flex-col items-center justify-center space-y-6 text-white bg-neutral-900 rounded-lg px-8 pt-8 pb-2 shadow-md fadeUp">
         <Head>
-          <title>Register - Twouitteur</title>
+          <title>Sign up - Twouitteur</title>
         </Head>
         <Image
           src={"/twouitteur.svg"}

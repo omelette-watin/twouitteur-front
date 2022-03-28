@@ -2,6 +2,7 @@ import GalaxyBg from "../components/GalaxyBg"
 import { useRouter } from "next/router"
 import api from "../services/api"
 import Image from "next/image"
+import Head from "next/head"
 const Logout = () => {
   const router = useRouter()
   const cancel = () => {
@@ -22,6 +23,9 @@ const Logout = () => {
 
   return (
     <GalaxyBg>
+      <Head>
+        <title>Log out - Twouitteur</title>
+      </Head>
       <div className="flex flex-col items-center justify-center text-white bg-neutral-900 rounded-lg px-8 py-8 shadow-md">
         <Image
           src={"/twouitteur.svg"}
