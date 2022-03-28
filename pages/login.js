@@ -17,7 +17,7 @@ const Login = () => {
     api
       .post("/auth/login", { username, password })
       .then(({ data }) => {
-        const token = data.user.token
+        const token = data.token
         localStorage.setItem("token", token)
         window.location.pathname = "/"
       })
@@ -33,7 +33,7 @@ const Login = () => {
       <Head>
         <title>Log in - Twouitteur</title>
       </Head>
-      <div className="flex flex-col items-center justify-center space-y-10 text-white bg-neutral-900 rounded-lg px-8 py-8 shadow-md fadeUp">
+      <div className="flex flex-col items-center justify-center space-y-6 text-white bg-neutral-900 rounded-lg px-8 pt-8 pb-2 shadow-md fadeUp">
         <Image
           src={"/twouitteur.svg"}
           width={50}
