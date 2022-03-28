@@ -4,7 +4,7 @@ import { useState } from "react"
 import GalaxyBg from "../components/GalaxyBg"
 import Loading from "../components/Loading"
 import api from "../services/api"
-
+import Head from "next/head"
 const Login = () => {
   const [password, setPassword] = useState("")
   const [username, setUsername] = useState("")
@@ -30,6 +30,9 @@ const Login = () => {
 
   return (
     <GalaxyBg>
+      <Head>
+        <title>Log in - Twouitteur</title>
+      </Head>
       <div className="flex flex-col items-center justify-center space-y-10 text-white bg-neutral-900 rounded-lg px-8 py-8 shadow-md fadeUp">
         <Image
           src={"/twouitteur.svg"}

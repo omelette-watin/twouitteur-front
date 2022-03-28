@@ -1,10 +1,14 @@
 import Link from "next/link"
 import Image from "next/image"
 import GalaxyBg from "./GalaxyBg"
+import Head from "next/head"
 
 const ConnectionScreen = () => {
   return (
     <GalaxyBg>
+      <Head>
+        <title>Twouitteur</title>
+      </Head>
       <div
         className={
           "flex flex-col items-center justify-center text-white xl:flex-row"
