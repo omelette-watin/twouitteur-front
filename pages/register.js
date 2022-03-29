@@ -47,9 +47,11 @@ export const Input = (props) => {
     <>
       <div className={`relative`}>
         <span
-          className={`absolute ${
-            !meta.error ? "text-green-500" : "text-red-500"
-          } text-md ml-2 inset-y-0 right-2 z-2 flex items-center`}
+          className={`absolute  ${
+            !meta.error && meta.value
+              ? "text-green-500 text-lg font-extrabold"
+              : "text-orange-500 text-md font-semibold"
+          }  ml-2 inset-y-0 right-2 z-2 flex items-center`}
         >
           {!meta.error && showFeedback ? "✓" : "*"}
         </span>
@@ -59,7 +61,7 @@ export const Input = (props) => {
           className={`rounded-md py-1 xl:py-2 px-3 w-52 md:w-64 xl:w-80 font-medium text-md placeholder:font-medium my-2 ${
             showFeedback
               ? meta.error
-                ? "border-[2px] border-red-500 outline-none"
+                ? "border-[2px] border-orange-500 outline-none"
                 : ""
               : ""
           } `}
@@ -72,7 +74,7 @@ export const Input = (props) => {
           <p
             id={`${props.id}-feedback`}
             aria-live="polite"
-            className={"text-red-600 text-sm"}
+            className={"text-orange-500 text-sm"}
           >
             {meta.error}
           </p>
@@ -157,7 +159,7 @@ const Register = () => {
               </div>
               {errors.server && (
                 <div className="flex items-center space-between ml-1 -mt-1 bounce w-48 xl:w-72">
-                  <p aria-live="polite" className={"text-red-600 text-sm"}>
+                  <p aria-live="polite" className={"text-orange-500 text-sm"}>
                     Something went wrong, please retry later
                   </p>
                 </div>

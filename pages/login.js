@@ -69,14 +69,14 @@ const Login = () => {
               </div>
               {errors.credentials && (
                 <div className="flex items-center space-between ml-1 -mt-1 bounce w-48 xl:w-72">
-                  <p aria-live="polite" className={"text-red-600 text-sm"}>
+                  <p aria-live="polite" className={"text-orange-500 text-sm"}>
                     {errors.credentials}
                   </p>
                 </div>
               )}
               {errors.server && (
                 <div className="flex items-center space-between ml-1 -mt-1 bounce w-48 xl:w-72">
-                  <p aria-live="polite" className={"text-red-600 text-sm"}>
+                  <p aria-live="polite" className={"text-orange-500 text-sm"}>
                     Something went wrong, please retry later
                   </p>
                 </div>
