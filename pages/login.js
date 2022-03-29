@@ -44,7 +44,10 @@ const Login = () => {
               })
               .catch((err) => {
                 if (err.response && err.response.data.message) {
-                  setErrors({ credentials: err.response.data.message })
+                  setErrors({
+                    username: err.response.data.message,
+                    password: err.response.data.message,
+                  })
                 } else {
                   setErrors({ server: true })
                 }
@@ -67,13 +70,6 @@ const Login = () => {
                   placeholder="Password"
                 />
               </div>
-              {errors.credentials && (
-                <div className="flex items-center space-between ml-1 -mt-1 bounce w-48 xl:w-72">
-                  <p aria-live="polite" className={"text-orange-500 text-sm"}>
-                    {errors.credentials}
-                  </p>
-                </div>
-              )}
               {errors.server && (
                 <div className="flex items-center space-between ml-1 -mt-1 bounce w-48 xl:w-72">
                   <p aria-live="polite" className={"text-orange-500 text-sm"}>
