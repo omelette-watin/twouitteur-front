@@ -36,7 +36,7 @@ const App = ({ Component, pageProps }) => {
     return <LoadingPage />
   }
 
-  if (!user && pageProps.protected) {
+  if (!user && !pageProps.unprotected) {
     return <ConnectionScreen />
   }
 

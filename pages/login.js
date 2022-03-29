@@ -113,3 +113,12 @@ const Login = () => {
 }
 
 export default Login
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      unprotected: true,
+      layout: false,
+    },
+  }
+}

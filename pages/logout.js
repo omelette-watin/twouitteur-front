@@ -55,3 +55,12 @@ const Logout = () => {
 }
 
 export default Logout
+
+export async function getStaticProps() {
+  return {
+    props: {
+      unprotected: true,
+      layout: false,
+    },
+  }
+}

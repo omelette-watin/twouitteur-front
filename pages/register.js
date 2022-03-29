@@ -196,3 +196,12 @@ const Register = () => {
 }
 
 export default Register
+
+export async function getStaticProps() {
+  return {
+    props: {
+      unprotected: true,
+      layout: false,
+    },
+  }
+}
