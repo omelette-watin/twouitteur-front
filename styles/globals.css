@@ -28,6 +28,12 @@
   animation-timing-function: cubic-bezier(.65,.39,.45,.85);
 }
 
+.fadeLeft {
+  animation-name: fadeLeft;
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(.65,.39,.45,.85);
+}
+
 .bounce {
   animation-name: bounce;
   animation-duration: .5s;
@@ -40,7 +46,15 @@
   to {
     transform: translateY(0);
   }
+}
 
+@keyframes fadeLeft {
+  from {
+    transform: translateX(-150%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes bounce {

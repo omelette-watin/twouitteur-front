@@ -54,7 +54,7 @@ const Sidebar = () => {
             {user.profilename || user.username}
           </p>
           <p className="text-[#6e767d] truncate xl:max-w-[130px]">
-            @{user.username}azeaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            @{user.username}
           </p>
         </div>
         <Link href={"/logout"}>
