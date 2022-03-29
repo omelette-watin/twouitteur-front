@@ -86,7 +86,7 @@ const Register = () => {
 
   return (
     <GalaxyBg>
-      <div className="flex flex-col items-center justify-center space-y-6 text-white bg-neutral-900 rounded-lg px-8 pt-8 pb-2 shadow-md fadeUp">
+      <div className="flex flex-col items-center justify-center space-y-6 text-white bg-neutral-900/[.85] rounded-lg px-8 pt-8 pb-2 shadow-md fadeUp">
         <Head>
           <title>Sign up - Twouitteur</title>
         </Head>

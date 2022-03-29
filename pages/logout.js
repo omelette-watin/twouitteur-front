@@ -26,7 +26,7 @@ const Logout = () => {
       <Head>
         <title>Log out - Twouitteur</title>
       </Head>
-      <div className="flex flex-col items-center justify-center text-white bg-neutral-900 rounded-lg px-8 py-8 shadow-md">
+      <div className="flex flex-col items-center justify-center text-white bg-neutral-900/[.85] rounded-lg px-8 py-8 shadow-md">
         <Image
           src={"/twouitteur.svg"}
           width={50}
