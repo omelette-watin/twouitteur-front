@@ -4,6 +4,7 @@ import LoadingPage from "../components/LoadingPage"
 import api from "../services/api"
 import { AuthContext } from "../contexts/auth"
 import ConnectionScreen from "../components/ConnectionScreen"
+import Layout from "../components/Layout"
 
 const App = ({ Component, pageProps }) => {
   const [user, setUser] = useState(null)
@@ -42,7 +43,9 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <AuthContext.Provider value={user}>
-      <Component {...pageProps} />
+      <Layout title={pageProps.title}>
+        <Component {...pageProps} />
+      </Layout>
     </AuthContext.Provider>
   )
 }

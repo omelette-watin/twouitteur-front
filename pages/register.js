@@ -201,7 +201,6 @@ export async function getStaticProps() {
   return {
     props: {
       unprotected: true,
-      layout: false,
     },
   }
 }

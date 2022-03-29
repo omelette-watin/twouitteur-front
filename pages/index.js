@@ -1,14 +1,10 @@
 import Feed from "../components/Feed"
 import Sidebar from "../components/Sidebar"
-import Head from "next/head"
 import BottomBar from "../components/BottomBar"
 
 export default function Home() {
   return (
     <div>
-      <Head>
-        <title>Twouitteur</title>
-      </Head>
       <main className="bg-black min-h-screen flex max-w-[1500px] mx-auto">
         <Sidebar />
         <BottomBar />
@@ -19,4 +15,12 @@ export default function Home() {
       </main>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      title: "Home",
+    },
+  }
 }
