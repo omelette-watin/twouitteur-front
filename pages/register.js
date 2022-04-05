@@ -14,7 +14,10 @@ const registerSchema = object({
     .trim()
     .min(3, "Must be at least 3 characters")
     .max(15, "Must be less than 15 characters")
-    .matches(/^[a-zA-Z0-9]+$/, "Cannot contain special characters or spaces"),
+    .matches(
+      /^[0-9A-Za-zÀ-ÖØ-öø-ÿ_-]+$/,
+      "Cannot contain special characters or spaces"
+    ),
   email: string().required("Required").email("Invalid email"),
   password: string()
     .required("Required")
