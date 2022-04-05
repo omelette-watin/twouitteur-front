@@ -19,8 +19,8 @@ const Feed = () => {
   const router = useRouter()
 
   return (
-    <div className="text-white flex-grow border-l border-r border-gray-700 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
-      <div className="text-[#d9d9d9] flex items-center sm:justify-between py-2 px-3 bg-black sticky top-0 z-50 border-b border-gray-700">
+    <div className="text-white flex-grow sm:border-l sm:border-r border-gray-700 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
+      <div className="text-[#d9d9d9] flex items-center sm:justify-between py-2 px-3 bg-black sticky top-0 z-20 border-b border-gray-700">
         <div className={"flex items-center space-x-4"}>
           {window.location.pathname.includes("/status") ? (
             <ArrowLeftIcon
@@ -58,7 +58,7 @@ const Feed = () => {
       {openMobileSidebar && (
         <div
           className={
-            "fadeLeft fixed top-0 bottom-0 left-0 bg-black text-sm min-w-[200px] h-full shadow-md border-r border-gray-700 z-4 flex flex-col items-start justify-start space-y-4 p-4 sm:hidden"
+            "fadeLeft fixed top-0 bottom-0 left-0 bg-black text-sm min-w-[200px] h-full shadow-md border-r border-gray-700 z-30 flex flex-col items-start justify-start space-y-4 p-4 sm:hidden"
           }
         >
           <div className={"flex items-center justify-between w-full"}>
