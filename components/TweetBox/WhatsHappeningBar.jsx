@@ -69,7 +69,7 @@ const DraftEditor = forwardRef(({ placeholder, name = "editorState" }, ref) => {
   return (
     <div
       className={
-        "block relative overflow-hidden text-left py-3 px-3 text-white min-h-[24px]"
+        "block relative overflow-hidden text-left py-3 px-3 text-white min-h-[24px] text-lg"
       }
     >
       <Editor

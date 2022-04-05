@@ -5,7 +5,7 @@ import BottomBar from "../components/BottomBar"
 export default function Home() {
   return (
     <div>
-      <main className="bg-black min-h-screen flex max-w-[1500px] mx-auto">
+      <main className="min-h-screen flex max-w-[1500px] mx-auto">
         <Sidebar />
         <BottomBar />
         <Feed />
