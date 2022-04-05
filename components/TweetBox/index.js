@@ -7,6 +7,7 @@ import { CharacterCounter } from "./CharacterCounter"
 import api from "../../services/api"
 import { useRef, useState } from "react"
 import { PrivacyPicker } from "./PrivacyPicker"
+import { MediaBar } from "./MediaBar"
 
 const MAX_CHARS_ALLOWED = 140
 const TweetBox = () => {
@@ -51,10 +52,10 @@ const TweetBox = () => {
         <PrivacyPicker />
         <div
           className={
-            "flex justify-between border-t-[1px] border-gray-700 mt-2 pt-3 px-2"
+            "flex justify-between border-t-[1px] border-gray-700 mt-2 pt-3 pr-2"
           }
         >
-          <div />
+          <MediaBar />
           <div className={"flex items-center space-x-3"}>
             <CharacterCounter maxChars={MAX_CHARS_ALLOWED} />
             <SubmitButton loading={submitting} />

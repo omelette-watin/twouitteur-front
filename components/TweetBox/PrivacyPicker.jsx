@@ -67,7 +67,7 @@ export const PrivacyPicker = () => {
   )
 }
 
-const useClickOutPicker = (cb) => {
+export const useClickOutPicker = (cb) => {
   const ref = useRef(null)
   useEffect(() => {
     const clickOut = (e) => {
