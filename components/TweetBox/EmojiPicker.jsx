@@ -2,9 +2,15 @@ import { useSelector } from "usetheform"
 import { EditorState, Modifier } from "draft-js"
 import { useClickOutPicker } from "./PrivacyPicker"
 import emojisvg from "../../public/emoji-picker.svg"
-import Picker from "emoji-picker-react"
 import Image from "next/image"
 import { useState } from "react"
+let Picker
+
+if (typeof window !== "undefined") {
+  import("emoji-picker-react").then((_module) => {
+    Picker = _module.default
+  })
+}
 
 export const EmojiPicker = ({ disabled }) => {
   const [showEmojiPicker, togglePicker] = useState(false)
