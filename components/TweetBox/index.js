@@ -20,14 +20,11 @@ const TweetBox = () => {
       editor: { plainText },
       postPrivacy,
     } = state
-    console.log({
-      plainText: plainText.trim(),
-      postPrivacy,
+
+    api.post("/tweet/", { content: plainText.trim(), postPrivacy }).then(() => {
+      editor.current.reset()
+      setSubmitting(false)
     })
-    // api.post("/tweet/", { content: plainText }).then(() => {
-    //   editor.current.reset()
-    setSubmitting(false)
-    // })
   }
 
   return (
