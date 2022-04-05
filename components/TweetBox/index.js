@@ -6,6 +6,7 @@ import { WhatsHappeningBar } from "./WhatsHappeningBar"
 import { CharacterCounter } from "./CharacterCounter"
 import api from "../../services/api"
 import { useRef, useState } from "react"
+import { PrivacyPicker } from "./PrivacyPicker"
 
 const MAX_CHARS_ALLOWED = 140
 const TweetBox = () => {
@@ -16,17 +17,21 @@ const TweetBox = () => {
     setSubmitting(true)
     const {
       editor: { plainText },
+      postPrivacy,
     } = state
-
-    api.post("/tweet/", { content: plainText }).then(() => {
-      editor.current.reset()
-      setSubmitting(false)
+    console.log({
+      plainText: plainText.trim(),
+      postPrivacy,
     })
+    // api.post("/tweet/", { content: plainText }).then(() => {
+    //   editor.current.reset()
+    setSubmitting(false)
+    // })
   }
 
   return (
     <div
-      className={`border-b border-gray-700 px-3 py-3 flex items-start space-x-3 overflow-y-scroll scrollbar-hide`}
+      className={`border-b border-gray-700 px-3 py-3 flex items-start space-x-3 scrollbar-hide`}
     >
       <div className={"mt-3"}>
         <Image
@@ -43,6 +48,7 @@ const TweetBox = () => {
           maxChars={MAX_CHARS_ALLOWED}
           placeholder={"What's happening ?"}
         />
+        <PrivacyPicker />
         <div
           className={
             "flex justify-between border-t-[1px] border-gray-700 mt-2 pt-3 px-2"
