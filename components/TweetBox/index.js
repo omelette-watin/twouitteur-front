@@ -5,16 +5,22 @@ import { SubmitButton } from "./SubmitButton"
 import { WhatsHappeningBar } from "./WhatsHappeningBar"
 import { CharacterCounter } from "./CharacterCounter"
 import api from "../../services/api"
+import { useRef, useState } from "react"
+
 const MAX_CHARS_ALLOWED = 140
 const TweetBox = () => {
   const { user } = useAuth()
+  const [submitting, setSubmitting] = useState(false)
+  const editor = useRef()
   const onSubmit = (state) => {
+    setSubmitting(true)
     const {
       editor: { plainText },
     } = state
 
-    api.post("/tweet/", { content: plainText }).then((res) => {
-      console.log(res.data)
+    api.post("/tweet/", { content: plainText }).then(() => {
+      editor.current.reset()
+      setSubmitting(false)
     })
   }
 
@@ -22,15 +28,18 @@ const TweetBox = () => {
     <div
       className={`border-b border-gray-700 px-3 py-3 flex items-start space-x-3 overflow-y-scroll scrollbar-hide`}
     >
-      <Image
-        src={user.image || "/default-avatar.svg"}
-        alt="Your avatar"
-        className="rounded-full"
-        width={30}
-        height={30}
-      />
+      <div className={"mt-3"}>
+        <Image
+          src={user.image || "/default-avatar.svg"}
+          alt="Your avatar"
+          className="rounded-full"
+          width={30}
+          height={30}
+        />
+      </div>
       <Form className={"w-full z-4"} onSubmit={onSubmit}>
         <WhatsHappeningBar
+          ref={editor}
           maxChars={MAX_CHARS_ALLOWED}
           placeholder={"What's happening ?"}
         />
@@ -42,7 +51,7 @@ const TweetBox = () => {
           <div />
           <div className={"flex items-center space-x-3"}>
             <CharacterCounter maxChars={MAX_CHARS_ALLOWED} />
-            <SubmitButton />
+            <SubmitButton loading={submitting} />
           </div>
         </div>
       </Form>

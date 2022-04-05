@@ -1,6 +1,7 @@
 import { Collection, useField, Input } from "usetheform"
-import { useCallback, useMemo, useRef } from "react"
+import { forwardRef, useCallback, useImperativeHandle, useRef } from "react"
 import { Editor, EditorState, CompositeDecorator } from "draft-js"
+import Tag from "../Tag"
 
 const limitTo = (limit) => (editorState) => {
   const { length = 0 } = editorState?.plainText || ""
@@ -15,7 +16,7 @@ const extractPlainText = (editor) => {
   return { ...editor, plainText }
 }
 const createHighlightDecorator = (regex) => {
-  function hashTagStrategy(contentBlock, callback) {
+  function tagStrategy(contentBlock, callback) {
     const text = contentBlock.getText()
     let matchArr, start
 
@@ -26,48 +27,23 @@ const createHighlightDecorator = (regex) => {
   }
 
   return {
-    strategy: hashTagStrategy,
-    component: HashTag,
+    strategy: tagStrategy,
+    component: Tag,
   }
-}
-const createOverLimitDecorator = (maxChars) => {
-  function overLimitStrategy(contentBlock, callback) {
-    const text = contentBlock.getText()
-    const { length } = text
-
-    if (length >= maxChars) {
-      callback(maxChars, length)
-    }
-  }
-
-  return {
-    strategy: overLimitStrategy,
-    component: OverLimit,
-  }
-}
-function OverLimit({ children }) {
-  return <span className="bg-orange-500">{children}</span>
-}
-
-function HashTag({ children }) {
-  return <span className="text-[#1B95E0]">{children}</span>
 }
 const detectHashtag = /(?:\s|^)(#[0-9A-Za-zÀ-ÖØ-öø-ÿ_-]+)/gi
 const detectMention = /(?:\s|^)(@[0-9A-Za-zÀ-ÖØ-öø-ÿ_-]+)/gi
 const detectURL =
   /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi
-const composeDecorators = (maxChars) =>
+const composeDecorators = () =>
   new CompositeDecorator([
-    createOverLimitDecorator(maxChars),
     createHighlightDecorator(detectHashtag),
     createHighlightDecorator(detectMention),
     createHighlightDecorator(detectURL),
   ])
-const DraftEditor = ({ maxChars, placeholder, name = "editorState" }) => {
-  const initialState = useMemo(
-    () => EditorState.createEmpty(composeDecorators(maxChars)),
-    [maxChars]
-  )
+// eslint-disable-next-line react/display-name
+const DraftEditor = forwardRef(({ placeholder, name = "editorState" }, ref) => {
+  const initialState = EditorState.createEmpty(composeDecorators())
   const { value, setValue } = useField({
     type: "custom",
     name,
@@ -84,6 +60,12 @@ const DraftEditor = ({ maxChars, placeholder, name = "editorState" }) => {
     value: refEditor,
   })
 
+  useImperativeHandle(ref, () => ({
+    reset() {
+      setValue(() => EditorState.createEmpty(composeDecorators()))
+    },
+  }))
+
   return (
     <div
       className={
@@ -98,24 +80,28 @@ const DraftEditor = ({ maxChars, placeholder, name = "editorState" }) => {
       />
     </div>
   )
-}
+})
 
-export const WhatsHappeningBar = ({ maxChars, placeholder }) => {
-  return (
-    <>
-      <Collection
-        object
-        name={"editor"}
-        validators={[limitTo(maxChars)]}
-        reducers={extractPlainText}
-      >
-        <DraftEditor
-          name={"editorState"}
-          maxChars={maxChars}
-          placeholder={placeholder}
-        />
-        <Input type={"hidden"} name={"plainText"} />
-      </Collection>
-    </>
-  )
-}
+// eslint-disable-next-line react/display-name
+export const WhatsHappeningBar = forwardRef(
+  ({ maxChars, placeholder }, ref) => {
+    return (
+      <>
+        <Collection
+          object
+          name={"editor"}
+          validators={[limitTo(maxChars)]}
+          reducers={extractPlainText}
+        >
+          <DraftEditor
+            ref={ref}
+            name={"editorState"}
+            maxChars={maxChars}
+            placeholder={placeholder}
+          />
+          <Input type={"hidden"} name={"plainText"} />
+        </Collection>
+      </>
+    )
+  }
+)
