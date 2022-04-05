@@ -83,3 +83,8 @@
     transform: translateX(0px);
   }
 }
+
+.public-DraftEditorPlaceholder-root {
+  width: fit-content;
+  position: absolute;
+}

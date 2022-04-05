@@ -12,6 +12,7 @@ import { useAuth } from "../contexts/auth"
 import { useState } from "react"
 import { LogoutIcon } from "@heroicons/react/solid"
 import MobileSidebarLink from "./MobileSidebarLink"
+import TweetBox from "./TweetBox"
 const Feed = () => {
   const { user } = useAuth()
   const [openMobileSidebar, setOpenMobileSidebar] = useState(false)
@@ -19,7 +20,7 @@ const Feed = () => {
 
   return (
     <div className="text-white flex-grow border-l border-r border-gray-700 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
-      <div className="text-[#d9d9d9] flex items-center sm:justify-between py-2 px-3 sticky top-0 z-3 bg-black border-b border-gray-700">
+      <div className="text-[#d9d9d9] flex items-center sm:justify-between py-2 px-3 sticky top-0 z-3 border-b border-gray-700">
         <div className={"flex items-center space-x-4"}>
           {window.location.pathname.includes("/status") ? (
             <ArrowLeftIcon
@@ -49,7 +50,7 @@ const Feed = () => {
           <SparklesIcon className="h-5 text-white" />
         </div>
       </div>
-      {/* <TweetBox /> */}
+      <TweetBox />
       <div className={"h-[4600px]"}>
         {/* <Post /> */}
         {/*  Children */}
