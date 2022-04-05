@@ -41,6 +41,14 @@ const App = ({ Component, pageProps }) => {
     return <ConnectionScreen />
   }
 
+  if (pageProps.unprotected) {
+    return (
+      <AuthContext.Provider value={user}>
+        <Component {...pageProps} />
+      </AuthContext.Provider>
+    )
+  }
+
   return (
     <AuthContext.Provider value={user}>
       <Layout title={pageProps.title}>
