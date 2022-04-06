@@ -36,7 +36,7 @@
 
 .bounce {
   animation-name: bounce;
-  animation-duration: .5s;
+  animation-duration: .7s;
 }
 
 @keyframes fadeUp {
