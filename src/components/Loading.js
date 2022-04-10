@@ -2,7 +2,7 @@ const Loading = ({ color }) => {
   return (
     <svg
       role="status"
-      className="ml-4 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 inline"
+      className="ml-4 inline h-8 w-8 animate-spin text-gray-200 dark:text-gray-600"
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

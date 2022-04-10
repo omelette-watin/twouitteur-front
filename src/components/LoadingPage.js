@@ -2,8 +2,8 @@ import Loading from "./Loading"
 
 const LoadingPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <Loading color={"#00AAEC"} />
+    <div className="flex min-h-screen items-center justify-center">
+      <Loading color="#00AAEC" />
     </div>
   )
 }

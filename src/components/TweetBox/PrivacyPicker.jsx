@@ -1,6 +1,6 @@
-import privacy0 from "../../public/privacy/privacy-world.svg"
-import privacy1 from "../../public/privacy/privacy-following.svg"
-import privacy2 from "../../public/privacy/privacy-mentionned.svg"
+import privacy0 from "@@/public/privacy/privacy-world.svg"
+import privacy1 from "@@/public/privacy/privacy-following.svg"
+import privacy2 from "@@/public/privacy/privacy-mentionned.svg"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { useSelector, Input } from "usetheform"
@@ -10,7 +10,35 @@ const labels = {
   1: "People you follow",
   2: "Only people you mention",
 }
-export const PrivacyPicker = () => {
+const RadioWithLabel = ({
+  id,
+  img,
+  name = "postPrivacy",
+  children,
+  value,
+  checked,
+}) => {
+  return (
+    <div className="flex items-center">
+      <Input
+        type="radio"
+        className="hidden"
+        id={id}
+        name={name}
+        value={value}
+        checked={checked}
+      />
+      <label
+        className="relative flex cursor-pointer items-center space-x-2 rounded-full py-1 pl-2 pr-3 hover:bg-[#1d9bf0]/10"
+        htmlFor={id}
+      >
+        <Image alt="privacy" src={img} />
+        <span>{children}</span>
+      </label>
+    </div>
+  )
+}
+const PrivacyPicker = () => {
   const [visible, setVisibility] = useState(false)
   const [postPrivacy] = useSelector((state) => state.postPrivacy)
   const label = labels[postPrivacy] || labels[0]
@@ -30,19 +58,24 @@ export const PrivacyPicker = () => {
   }, [postPrivacy])
 
   return (
-    <div className={"relative"}>
+    <div className="relative">
       <button
         type="button"
-        className="space-x-2 flex items-center text-[#1d9bf0] text-sm hover:bg-[#1d9bf0]/10 rounded-full py-1 pl-2 pr-3"
+        className="flex items-center space-x-2 rounded-full py-1 pl-2 pr-3 text-sm text-[#1d9bf0] hover:bg-[#1d9bf0]/10"
         onClick={toggle}
       >
-        <Image alt={bntLabel} src={privacy0} className={"h-8 w-8"} />
+        <Image
+          alt={bntLabel}
+          src={"/privacy/privacy-world.svg"}
+          width={24}
+          height={24}
+        />
         <span>{bntLabel}</span>
       </button>
       <div
         ref={refPicker}
         data-visible={visible}
-        className={`absolute z-10 bg-black border-[1px] border-gray-700 rounded py-3 px-3 shadow-md ${
+        className={`absolute top-12 z-10 rounded border-[1px] border-gray-700 bg-black py-3 px-3 shadow-md ${
           visible ? "block" : "hidden"
         }`}
       >
@@ -50,7 +83,7 @@ export const PrivacyPicker = () => {
         <div className="py-0 px-2">
           Choose who can reply to this Tweet. Anyone mentioned can always reply.
         </div>
-        <div className="space-y-2 mt-3">
+        <div className="mt-3 space-y-2">
           <RadioWithLabel img={privacy0} id="everyone" value="0" checked>
             {labels[0]}
           </RadioWithLabel>
@@ -85,31 +118,4 @@ export const useClickOutPicker = (cb) => {
   return ref
 }
 
-function RadioWithLabel({
-  id,
-  img,
-  name = "postPrivacy",
-  children,
-  value,
-  checked,
-}) {
-  return (
-    <div className="flex items-center">
-      <Input
-        type="radio"
-        className={"hidden"}
-        id={id}
-        name={name}
-        value={value}
-        checked={checked}
-      />
-      <label
-        className="flex items-center pl-2 pr-3 py-1 rounded-full space-x-2 cursor-pointer relative hover:bg-[#1d9bf0]/10"
-        htmlFor={id}
-      >
-        <Image alt="privacy" src={img} />
-        <span>{children}</span>
-      </label>
-    </div>
-  )
-}
+export default PrivacyPicker

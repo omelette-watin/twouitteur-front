@@ -1,6 +1,6 @@
-import Feed from "../components/Feed"
+import Feed from "@/components/Feed"
 
-export default function Home() {
+const Home = () => {
   return <Feed />
 }
 
@@ -11,3 +11,5 @@ export async function getStaticProps() {
     },
   }
 }
+
+export default Home

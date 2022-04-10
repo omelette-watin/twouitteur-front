@@ -1,4 +1,6 @@
 import { useSelector } from "usetheform"
+
+const WARNING_AFTER = 10
 const ProgressRing = ({
   textLabel,
   colorBar = "#1da1f2",
@@ -46,7 +48,7 @@ const ProgressRing = ({
   )
 }
 const colors = { warning: "#ffad1f", error: "#e0245e", success: "#1da1f2" }
-export function getColors(numOfChars, max, warning) {
+const getColors = (numOfChars, max, warning) => {
   switch (true) {
     case numOfChars >= 0 && numOfChars < max - warning: {
       return colors.success
@@ -60,8 +62,8 @@ export function getColors(numOfChars, max, warning) {
       return colors.error
   }
 }
-const WARNING_AFTER = 10
-export const getProgressRingBarProps = (
+
+const getProgressRingBarProps = (
   plainText = "",
   maxChars,
   warningLimit = WARNING_AFTER
@@ -77,7 +79,7 @@ export const getProgressRingBarProps = (
   return { progress, textLabel, hideRingBar, colorBar, uiStatus }
 }
 
-export const CharacterCounter = ({ maxChars }) => {
+const CharacterCounter = ({ maxChars }) => {
   const [plainText] = useSelector((state) => state.editor.plainText)
   const { uiStatus, ...propsRingBar } = getProgressRingBarProps(
     plainText,
@@ -90,3 +92,5 @@ export const CharacterCounter = ({ maxChars }) => {
     </div>
   )
 }
+
+export default CharacterCounter

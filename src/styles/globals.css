@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black;
+  }
+}
+
+@layer components {
+  .hoverAnimation {
+    @apply h-[52px] w-[52px] cursor-pointer rounded-full transition duration-200 ease-out hover:bg-[#d9d9d9] hover:bg-opacity-10 xl:h-auto xl:w-fit xl:py-3 xl:pr-6 xl:pl-4;
+  }
+
+  .icon {
+    @apply flex h-9 w-9 cursor-pointer items-center justify-center rounded-full transition ease-out hover:bg-[#1d9bf0] hover:bg-opacity-10;
+  }
+
+  .tag {
+    @apply cursor-pointer font-normal text-[#1d9bf0] hover:underline;
+  }
+}
+
+.fadeUp {
+  animation-name: fadeUp;
+  animation-duration: 1.2s;
+  animation-timing-function: cubic-bezier(0.65, 0.39, 0.45, 0.85);
+}
+
+.fadeLeft {
+  animation-name: fadeLeft;
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.65, 0.39, 0.45, 0.85);
+}
+
+.bounce {
+  animation-name: bounce;
+  animation-duration: 0.7s;
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(-150%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeLeft {
+  from {
+    transform: translateX(-150%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateX(0px);
+  }
+  37% {
+    transform: translateX(5px);
+  }
+  55% {
+    transform: translateX(-5px);
+  }
+  73% {
+    transform: translateX(4px);
+  }
+  82% {
+    transform: translateX(-4px);
+  }
+  91% {
+    transform: translateX(2px);
+  }
+  96% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.public-DraftEditorPlaceholder-root {
+  z-index: -1;
+  color: #71767b;
+  font-weight: 500;
+  width: fit-content;
+  position: absolute;
+}

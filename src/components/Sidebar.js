@@ -10,25 +10,31 @@ import {
   UserIcon,
   DotsCircleHorizontalIcon,
 } from "@heroicons/react/outline"
-import { useAuth } from "../contexts/auth"
+import { useAppContext } from "./AppContext"
 import Link from "next/link"
+import { useRouter } from "next/router"
+import { useTweetModal } from "./TweetModalContext"
+
 const Sidebar = () => {
-  const { user } = useAuth()
+  const { user } = useAppContext()
+  const { setToggleModal } = useTweetModal()
+  const router = useRouter()
   const isActive = (pathname) => {
-    return pathname === window.location.pathname
+    return router.pathname.startsWith(pathname)
   }
+  const handleOpenTweetModal = () => setToggleModal(true)
 
   return (
-    <div className="hidden sm:flex flex-col items-center xl:items-start xl:w-[340px] p-2 fixed h-full">
-      <div className="flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24">
+    <div className="fixed hidden h-full flex-col items-center p-2 sm:flex xl:w-[340px] xl:items-start">
+      <div className="hoverAnimation flex h-14 w-14 items-center justify-center p-0 xl:ml-24">
         <Image
-          src={"/twouitteur-white.svg"}
+          src="/twouitteur-white.svg"
           width={30}
           height={30}
-          alt={"twouitteur logo"}
+          alt="twouitteur logo"
         />
       </div>
-      <div className="space-y-2 mt-4 mb-2.5 xl:ml-24">
+      <div className="mt-4 mb-2.5 space-y-2 xl:ml-24">
         <SidebarLink text="Home" Icon={HomeIcon} active={isActive("/")} />
         <SidebarLink text="Explore" Icon={HashtagIcon} />
         <SidebarLink text="Notifications" Icon={BellIcon} />
@@ -38,10 +44,13 @@ const Sidebar = () => {
         <SidebarLink text="Profile" Icon={UserIcon} />
         <SidebarLink text="More" Icon={DotsCircleHorizontalIcon} />
       </div>
-      <button className="hidden xl:inline ml-auto mt-2 bg-[#1d9bf0] text-white rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]">
+      <button
+        className="ml-auto mt-2 hidden h-[52px] w-56 rounded-full bg-[#1d9bf0] text-lg font-bold text-white shadow-md hover:bg-[#1a8cd8] xl:inline"
+        onClick={handleOpenTweetModal}
+      >
         Tweet
       </button>
-      <div className="text-[#d9d9d9] flex items-center justify-center mt-auto hoverAnimation xl:justify-start xl:ml-24 xl:w-[244px]">
+      <div className="hoverAnimation mt-auto flex items-center justify-center text-[#d9d9d9] xl:ml-24 xl:w-[244px] xl:justify-start">
         <Image
           src={user.image || "/default-avatar.svg"}
           alt="Your avatar"
@@ -49,17 +58,17 @@ const Sidebar = () => {
           width={30}
           height={30}
         />
-        <div className="hidden xl:inline leading-5 xl:ml-3 ">
-          <p className="font-bold truncate xl:max-w-[130px]">
+        <div className="hidden leading-5 xl:ml-3 xl:inline ">
+          <p className="truncate font-bold xl:max-w-[130px]">
             {user.profilename || user.username}
           </p>
-          <p className="text-[#6e767d] truncate xl:max-w-[130px]">
+          <p className="truncate text-[#6e767d] xl:max-w-[130px]">
             @{user.username}
           </p>
         </div>
-        <Link href={"/logout"}>
-          <a title={"Log out"} className={"hidden xl:inline ml-auto"}>
-            <LogoutIcon className={"h-5"} title={"Log out"} />
+        <Link href="/logout">
+          <a title="Log out" className="ml-auto hidden xl:inline">
+            <LogoutIcon className="h-5" title="Log out" />
           </a>
         </Link>
       </div>

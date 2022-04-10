@@ -1,7 +1,6 @@
 import { useSelector } from "usetheform"
 import { EditorState, Modifier } from "draft-js"
-import { useClickOutPicker } from "./PrivacyPicker"
-import emojisvg from "../../public/emoji-picker.svg"
+import { useClickOutPicker } from "@/components/TweetBox/PrivacyPicker"
 import Image from "next/image"
 import { useState } from "react"
 let Picker
@@ -12,7 +11,7 @@ if (typeof window !== "undefined") {
   })
 }
 
-export const EmojiPicker = ({ disabled }) => {
+const EmojiPicker = ({ disabled }) => {
   const [showEmojiPicker, togglePicker] = useState(false)
   const [editor, setEditor] = useSelector((state) => state.editor)
   const toggleEmojiPicker = () => togglePicker((prev) => !prev)
@@ -39,22 +38,31 @@ export const EmojiPicker = ({ disabled }) => {
   })
 
   return (
-    <div ref={refPicker} className={"relative"} title={"Choose an emoji"}>
+    <div ref={refPicker} className="relative" title="Choose an emoji">
       <button
         disabled={disabled}
-        type={"button"}
+        type="button"
         className={
-          "hover:bg-[#1d9bf0]/10 rounded-full flex items-center justify-center p-2 transition 200ms ease-in-out"
+          "200ms flex items-center justify-center rounded-full p-2 transition ease-in-out hover:bg-[#1d9bf0]/10"
         }
         onClick={toggleEmojiPicker}
       >
-        <Image src={emojisvg} alt={"Add emoji"} />
+        <Image src="/emoji-picker.svg" width={24} height={24} alt="Add emoji" />
       </button>
       {showEmojiPicker && (
         <div className="absolute z-10 text-black">
-          <Picker onEmojiClick={onEmojiClick} />
+          <Picker
+            onEmojiClick={onEmojiClick}
+            preload
+            searchPlaceholder="Search an emoji"
+            pickerStyle={{
+              boxShadow: "none",
+            }}
+          />
         </div>
       )}
     </div>
   )
 }
+
+export default EmojiPicker

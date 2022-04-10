@@ -69,7 +69,7 @@ const DraftEditor = forwardRef(({ placeholder, name = "editorState" }, ref) => {
   return (
     <div
       className={
-        "block relative overflow-hidden text-left py-3 px-3 text-white min-h-[24px] text-lg"
+        "relative block min-h-[24px] overflow-hidden py-3 px-3 text-left text-lg text-white"
       }
     >
       <Editor
@@ -81,27 +81,26 @@ const DraftEditor = forwardRef(({ placeholder, name = "editorState" }, ref) => {
     </div>
   )
 })
-
 // eslint-disable-next-line react/display-name
-export const WhatsHappeningBar = forwardRef(
-  ({ maxChars, placeholder }, ref) => {
-    return (
-      <>
-        <Collection
-          object
-          name={"editor"}
-          validators={[limitTo(maxChars)]}
-          reducers={extractPlainText}
-        >
-          <DraftEditor
-            ref={ref}
-            name={"editorState"}
-            maxChars={maxChars}
-            placeholder={placeholder}
-          />
-          <Input type={"hidden"} name={"plainText"} />
-        </Collection>
-      </>
-    )
-  }
-)
+const WhatsHappeningBar = forwardRef(({ maxChars, placeholder }, ref) => {
+  return (
+    <>
+      <Collection
+        object
+        name="editor"
+        validators={[limitTo(maxChars)]}
+        reducers={extractPlainText}
+      >
+        <DraftEditor
+          ref={ref}
+          name="editorState"
+          maxChars={maxChars}
+          placeholder={placeholder}
+        />
+        <Input type="hidden" name="plainText" />
+      </Collection>
+    </>
+  )
+})
+
+export default WhatsHappeningBar
