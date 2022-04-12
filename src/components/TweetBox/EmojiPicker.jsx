@@ -17,7 +17,7 @@ const EmojiPicker = ({ disabled }) => {
   const toggleEmojiPicker = () => togglePicker((prev) => !prev)
   const onEmojiClick = (e, emojiObj) => {
     e.preventDefault()
-    const { editorState, refEditor } = editor
+    const { editorState } = editor
     const contentState = editorState?.getCurrentContent()
     const targetRange = editorState?.getSelection()
     const modifierAPI = targetRange.isCollapsed()
@@ -30,8 +30,6 @@ const EmojiPicker = ({ disabled }) => {
     )
     const newEditorState = EditorState.push(editorState, newContentState)
     setEditor((prev) => ({ ...prev, editorState: newEditorState }))
-    toggleEmojiPicker()
-    setTimeout(() => refEditor.current.focus(), 100)
   }
   const refPicker = useClickOutPicker(() => {
     showEmojiPicker && togglePicker(false)
