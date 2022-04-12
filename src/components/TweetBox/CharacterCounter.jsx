@@ -62,7 +62,6 @@ const getColors = (numOfChars, max, warning) => {
       return colors.error
   }
 }
-
 const getProgressRingBarProps = (
   plainText = "",
   maxChars,
@@ -78,7 +77,6 @@ const getProgressRingBarProps = (
 
   return { progress, textLabel, hideRingBar, colorBar, uiStatus }
 }
-
 const CharacterCounter = ({ maxChars }) => {
   const [plainText] = useSelector((state) => state.editor.plainText)
   const { uiStatus, ...propsRingBar } = getProgressRingBarProps(
