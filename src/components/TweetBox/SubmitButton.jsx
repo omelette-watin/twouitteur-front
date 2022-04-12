@@ -1,4 +1,5 @@
 import { useForm } from "usetheform"
+import Loading from "../Loading"
 
 const SubmitButton = ({ submitting }) => {
   const { isValid, pristine, state } = useForm()
@@ -10,7 +11,8 @@ const SubmitButton = ({ submitting }) => {
       disabled={!isValid || pristine || isEmpty || submitting}
       type="submit"
     >
-      <span>Tweet</span>
+      <span>{submitting ? "Sending..." : "Tweet"}</span>
+      {submitting && <Loading color={"#1d9bf0"} />}
     </button>
   )
 }
