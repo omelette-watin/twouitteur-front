@@ -64,6 +64,9 @@ const DraftEditor = forwardRef(({ placeholder, name = "editorState" }, ref) => {
     reset() {
       setValue(() => EditorState.createEmpty(composeDecorators()))
     },
+    focus() {
+      setValue(() => EditorState.moveFocusToEnd(value))
+    },
   }))
 
   return (

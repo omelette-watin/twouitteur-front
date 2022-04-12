@@ -1,4 +1,4 @@
-import TweetBox from "./TweetBox/TweetBox"
+import { TweetBoxModal } from "./TweetBox/TweetBox"
 import { useTweetModal } from "./TweetModalContext"
 import { XIcon } from "@heroicons/react/outline"
 import { MinimalTweet } from "./Tweet"
@@ -22,7 +22,7 @@ const TweetModal = () => {
             <MinimalTweet tweet={tweetModal.replying.tweet} />
           </div>
         )}
-        <TweetBox replying={tweetModal.replying} />
+        <TweetBoxModal replying={tweetModal.replying} />
       </div>
     </div>
   )
