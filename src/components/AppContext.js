@@ -34,5 +34,5 @@ export const AppContextProvider = (props) => {
     })()
   }, [router])
 
-  return <AppContext.Provider {...props} value={{ user, loading }} />
+  return <AppContext.Provider {...props} value={{ user, setUser, loading }} />
 }

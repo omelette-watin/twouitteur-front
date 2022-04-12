@@ -43,11 +43,17 @@ const EmojiPicker = ({ disabled }) => {
         disabled={disabled}
         type="button"
         className={
-          "200ms flex items-center justify-center rounded-full p-2 transition ease-in-out hover:bg-[#1d9bf0]/10"
+          "hover:bg-twitter/10 flex items-center justify-center rounded-full p-2 transition ease-in-out"
         }
         onClick={toggleEmojiPicker}
       >
-        <Image src="/emoji-picker.svg" width={24} height={24} alt="Add emoji" />
+        <Image
+          src="/emoji-picker.svg"
+          width={24}
+          height={24}
+          alt="Add emoji"
+          className="h-[24px] w-[24px]"
+        />
       </button>
       {showEmojiPicker && (
         <div className="absolute z-10 text-black">

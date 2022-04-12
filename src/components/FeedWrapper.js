@@ -35,7 +35,7 @@ const FeedWrapper = () => {
 
   return (
     <div className="max-w-2xl flex-grow border-gray-700 text-white sm:ml-[73px] sm:border-l sm:border-r xl:ml-[370px]">
-      <div className="sticky top-0 z-20 flex items-center border-b border-gray-700 bg-black py-2 px-3 text-[#d9d9d9] sm:justify-between">
+      <div className="sticky top-0 z-20 flex items-center border-b border-gray-700 bg-black py-2 px-4 text-[#d9d9d9] sm:justify-between">
         <div className="flex items-center space-x-4">
           {isStatusPage ? (
             <ArrowLeftIcon className="h-5 text-white" onClick={handleGoBack} />
@@ -44,9 +44,9 @@ const FeedWrapper = () => {
               <Image
                 src={user.image || "/default-avatar.svg"}
                 alt="Your avatar"
-                className="rounded-full"
-                width={30}
-                height={30}
+                className="h-[33px] w-[33px] rounded-full"
+                width={36}
+                height={36}
                 onClick={handleOpenMobileSidebar}
               />
             </div>

@@ -117,7 +117,7 @@ const Register = () => {
               )}
               <div className="flex flex-col items-center space-y-3 py-8 text-white">
                 <button
-                  className={`block h-[52px] w-52 rounded-full bg-[#1d9bf0] text-lg font-bold shadow-md transition duration-200 ease-out hover:scale-95 hover:bg-[#1a8cd8] disabled:scale-100 disabled:bg-neutral-500`}
+                  className={`bg-twitter block h-[52px] w-52 rounded-full text-lg font-bold shadow-md transition duration-200 ease-out hover:scale-95 hover:bg-[#1a8cd8] disabled:scale-100 disabled:bg-neutral-500`}
                   type="submit"
                   disabled={!isValid || !dirty || submitting}
                 >

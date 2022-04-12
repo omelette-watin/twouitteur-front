@@ -29,7 +29,7 @@ const RadioWithLabel = ({
         checked={checked}
       />
       <label
-        className="relative flex cursor-pointer items-center space-x-2 rounded-full py-1 pl-2 pr-3 hover:bg-[#1d9bf0]/10"
+        className="hover:bg-twitter/10 relative flex cursor-pointer items-center space-x-2 rounded-full py-1 pl-2 pr-3"
         htmlFor={id}
       >
         <Image alt="privacy" src={img} />
@@ -61,7 +61,7 @@ const PrivacyPicker = () => {
     <div className="relative">
       <button
         type="button"
-        className="flex items-center space-x-2 rounded-full py-1 pl-2 pr-3 text-sm text-[#1d9bf0] hover:bg-[#1d9bf0]/10"
+        className="text-twitter hover:bg-twitter/10 flex items-center space-x-2 rounded-full py-1 pl-2 pr-3 text-sm"
         onClick={toggle}
       >
         <Image
@@ -104,7 +104,7 @@ export const useClickOutPicker = (cb) => {
   const ref = useRef(null)
   useEffect(() => {
     const clickOut = (e) => {
-      if (!ref.current.contains(e.target)) {
+      if (!ref.current?.contains(e.target)) {
         cb(e)
       }
     }

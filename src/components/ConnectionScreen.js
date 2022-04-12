@@ -22,7 +22,7 @@ const ConnectionScreen = () => {
         <div className="flex flex-col items-center space-y-3">
           <Link href="/login">
             <a>
-              <button className="block h-[52px] w-56 rounded-full bg-[#1d9bf0] text-lg font-bold shadow-md transition duration-200 ease-out hover:scale-95 hover:bg-[#1a8cd8]">
+              <button className="bg-twitter block h-[52px] w-56 rounded-full text-lg font-bold shadow-md transition duration-200 ease-out hover:scale-95 hover:bg-[#1a8cd8]">
                 Sign-in
               </button>
             </a>

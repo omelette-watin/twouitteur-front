@@ -31,8 +31,8 @@ const createHighlightDecorator = (regex) => {
     component: Tag,
   }
 }
-const detectHashtag = /(?:\s|^)(#[0-9A-Za-zÀ-ÖØ-öø-ÿ_-]+)/gi
-const detectMention = /(?:\s|^)(@[0-9A-Za-zÀ-ÖØ-öø-ÿ_-]+)/gi
+const detectHashtag = /\B(#[0-9A-Za-zÀ-ÖØ-öø-ÿ_-]+)(?![0-9A-Za-zÀ-ÖØ-öø-ÿ_-])/g
+const detectMention = /\B(@[0-9A-Za-zÀ-ÖØ-öø-ÿ_-]+)(?![0-9A-Za-zÀ-ÖØ-öø-ÿ_-])/g
 const detectURL =
   /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi
 const composeDecorators = () =>
@@ -69,7 +69,7 @@ const DraftEditor = forwardRef(({ placeholder, name = "editorState" }, ref) => {
   return (
     <div
       className={
-        "relative block min-h-[24px] overflow-hidden py-3 px-3 text-left text-lg text-white"
+        "relative block min-h-[24px] overflow-hidden py-3 text-left text-lg text-white"
       }
     >
       <Editor

@@ -5,12 +5,15 @@ export const TweetModalContext = createContext({})
 export const useTweetModal = () => useContext(TweetModalContext)
 
 export const TweetModalProvider = (props) => {
-  const [toggleModal, setToggleModal] = useState(false)
+  const [tweetModal, setTweetModal] = useState({
+    visible: false,
+    replying: false,
+  })
 
   return (
     <TweetModalContext.Provider
       {...props}
-      value={{ toggleModal, setToggleModal }}
+      value={{ tweetModal, setTweetModal }}
     />
   )
 }

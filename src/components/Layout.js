@@ -5,14 +5,14 @@ import { useTweetModal } from "./TweetModalContext"
 import TweetModal from "./TweetModal"
 
 const Layout = ({ title, children }) => {
-  const { toggleModal } = useTweetModal()
+  const { tweetModal } = useTweetModal()
 
   return (
     <>
       <Head>
         <title>{title ? `${title} / ` : ""}Twouitteur </title>
       </Head>
-      {toggleModal && <TweetModal />}
+      {tweetModal.visible && <TweetModal />}
       <main className="mx-auto flex min-h-screen max-w-[1500px]">
         <Sidebar />
         <MobileBar />

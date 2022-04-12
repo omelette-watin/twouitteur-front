@@ -6,7 +6,7 @@ const SubmitButton = ({ submitting }) => {
 
   return (
     <button
-      className="flex cursor-pointer items-center rounded-full border-0 bg-[#1d9bf0] py-1 px-4 text-lg font-semibold hover:bg-[#1a8cd8] disabled:cursor-default disabled:bg-neutral-500"
+      className="bg-twitter flex cursor-pointer items-center rounded-full border-0 py-1 px-4 text-lg font-semibold hover:bg-[#1a8cd8] disabled:cursor-default disabled:bg-neutral-500"
       disabled={!isValid || pristine || isEmpty || submitting}
       type="submit"
     >
