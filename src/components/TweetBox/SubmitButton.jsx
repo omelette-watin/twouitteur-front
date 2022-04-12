@@ -12,7 +12,7 @@ const SubmitButton = ({ submitting }) => {
       type="submit"
     >
       <span>{submitting ? "Sending..." : "Tweet"}</span>
-      {submitting && <Loading color={"#1d9bf0"} />}
+      {submitting && <Loading color={"#fff"} small />}
     </button>
   )
 }
