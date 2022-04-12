@@ -128,7 +128,7 @@ const Tweet = ({ tweet }) => {
           <p>
             Replying to{" "}
             <Link href={`/user/${originalTweet.author.username}`}>
-              <a className="text-twitter underline-offset-2 hover:underline">
+              <a className="text-twitter underline-offset-1 hover:underline">
                 @{originalTweet.author.username}
               </a>
             </Link>
@@ -231,7 +231,7 @@ export const MinimalTweet = ({ tweet }) => {
         <div className="flex items-center space-x-1">
           <p className="font-extrabold">
             <Link href={`/${author.username}`}>
-              <a className="underline-offset-2 hover:underline">
+              <a className="underline-offset-1 hover:underline">
                 {author.profilename || author.username}
               </a>
             </Link>
