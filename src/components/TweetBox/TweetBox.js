@@ -21,7 +21,7 @@ const TweetBox = ({ replying }) => {
   const { setTweetsPosted } = useTweetPosted()
   const [newTweetId, setNewTweetId] = useState("")
   const editor = useRef()
-  const onSubmit = (state) => {
+  const onSubmit = async (state) => {
     setSubmitting(true)
     const {
       editor: { plainText },
@@ -128,7 +128,7 @@ const TweetBox = ({ replying }) => {
             <MediaBar />
             <div className="flex items-center space-x-3">
               <CharacterCounter maxChars={MAX_CHARS_ALLOWED} />
-              <SubmitButton loading={submitting} />
+              <SubmitButton submitting={submitting} />
             </div>
           </div>
         </Form>
@@ -157,7 +157,7 @@ export const TweetBoxModal = ({ replying }) => {
   const { setTweetsPosted } = useTweetPosted()
   const [newTweetId, setNewTweetId] = useState("")
   const editor = useRef()
-  const onSubmit = (state) => {
+  const onSubmit = async (state) => {
     setSubmitting(true)
     const {
       editor: { plainText },
@@ -268,7 +268,7 @@ export const TweetBoxModal = ({ replying }) => {
             <MediaBar />
             <div className="flex items-center space-x-3">
               <CharacterCounter maxChars={MAX_CHARS_ALLOWED} />
-              <SubmitButton loading={submitting} />
+              <SubmitButton submitting={submitting} />
             </div>
           </div>
         </Form>
