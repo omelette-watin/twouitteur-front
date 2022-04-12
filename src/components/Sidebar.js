@@ -14,6 +14,7 @@ import { useAppContext } from "./AppContext"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useTweetModal } from "./TweetModalContext"
+import { useCallback } from "react"
 
 const Sidebar = () => {
   const { user } = useAppContext()
@@ -22,7 +23,7 @@ const Sidebar = () => {
   const isActive = (pathname) => {
     return router.pathname.startsWith(pathname)
   }
-  const handleOpenTweetModal = () => setToggleModal(true)
+  const handleOpenTweetModal = useCallback(() => setToggleModal(true), [])
 
   return (
     <div className="fixed hidden h-full flex-col items-center p-2 sm:flex xl:w-[340px] xl:items-start">

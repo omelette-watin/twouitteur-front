@@ -1,7 +1,7 @@
-import Feed from "@/components/Feed"
+import FeedWrapper from "@/components/FeedWrapper"
 
 const Home = () => {
-  return <Feed />
+  return <FeedWrapper />
 }
 
 export async function getStaticProps() {

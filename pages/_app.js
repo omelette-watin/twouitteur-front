@@ -3,7 +3,8 @@ import LoadingPage from "@/components/LoadingPage"
 import { AppContextProvider, useAppContext } from "@/components/AppContext"
 import ConnectionScreen from "@/components/ConnectionScreen"
 import Layout from "@/components/Layout"
-import { TweetModalContext, TweetModalProvider } from "@/components/TweetModalContext"
+import { TweetModalProvider } from "@/components/TweetModalContext"
+import { TweetPostedProvider } from "@/components/TweetPostedContext"
 
 const AppContent = ({ Component, pageProps, ...otherProps }) => {
   const { user, loading } = useAppContext()
@@ -21,11 +22,13 @@ const AppContent = ({ Component, pageProps, ...otherProps }) => {
   }
 
   return (
-    <TweetModalProvider>
-      <Layout title={pageProps.title}>
-        <Component {...pageProps} {...otherProps} />
-      </Layout>
-    </TweetModalProvider>
+    <TweetPostedProvider>
+      <TweetModalProvider>
+        <Layout title={pageProps.title}>
+          <Component {...pageProps} {...otherProps} />
+        </Layout>
+      </TweetModalProvider>
+    </TweetPostedProvider>
   )
 }
 const App = (props) => (
