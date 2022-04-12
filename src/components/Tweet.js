@@ -76,9 +76,12 @@ const Tweet = ({ tweet }) => {
   const { author, _count, content, originalTweet } = tweet
   const [likes, setLikes] = useState(_count.likes)
   const [retweets, setRetweets] = useState(_count.retweets)
+  const [liking, setLiking] = useState(false)
+  const [retweeting, setRetweeting] = useState(false)
   const isLiked = user.likes.includes(tweet.id)
   const isRetweeted = user.retweets.includes(tweet.id)
   const handleLike = () => {
+    setLiking(true)
     api.post(`/tweet/${tweet.id}/like`).then(() => {
       if (isLiked) {
         setLikes(likes - 1)
@@ -93,9 +96,12 @@ const Tweet = ({ tweet }) => {
           likes: user.likes.concat(tweet.id),
         })
       }
+
+      setLiking(false)
     })
   }
   const handleRetweet = () => {
+    setRetweeting(true)
     api.post(`/tweet/${tweet.id}/retweet`).then(() => {
       if (isRetweeted) {
         setRetweets(retweets - 1)
@@ -110,6 +116,8 @@ const Tweet = ({ tweet }) => {
           retweets: user.retweets.concat(tweet.id),
         })
       }
+
+      setRetweeting(false)
     })
   }
   const handleReply = () =>
@@ -171,7 +179,7 @@ const Tweet = ({ tweet }) => {
               <span>{_count.responses}</span>
               <ToolTip>Reply</ToolTip>
             </div>
-            <div
+            <button
               className={classNames(
                 "group relative flex cursor-pointer items-center space-x-1 transition ease-in-out hover:text-green-500",
                 {
@@ -179,6 +187,7 @@ const Tweet = ({ tweet }) => {
                 }
               )}
               onClick={handleRetweet}
+              disabled={retweeting}
             >
               {isRetweeted ? (
                 <ReplyIconSolid className="h-8 rounded-full p-2 transition ease-in-out group-hover:bg-green-500/10 lg:h-9" />
@@ -187,8 +196,8 @@ const Tweet = ({ tweet }) => {
               )}
               <span>{retweets}</span>
               <ToolTip>Retweet</ToolTip>
-            </div>
-            <div
+            </button>
+            <button
               className={classNames(
                 "group relative flex cursor-pointer items-center space-x-1 transition ease-in-out hover:text-red-500",
                 {
@@ -196,6 +205,7 @@ const Tweet = ({ tweet }) => {
                 }
               )}
               onClick={handleLike}
+              disabled={liking}
             >
               {isLiked ? (
                 <HeartIconSolid className="h-8 rounded-full p-2 transition ease-in-out group-hover:bg-red-500/10 lg:h-9" />
@@ -204,14 +214,13 @@ const Tweet = ({ tweet }) => {
               )}
               <span>{likes}</span>
               <ToolTip>Like</ToolTip>
-            </div>
+            </button>
           </div>
         </div>
       </div>
     </div>
   )
 }
-
 export const MinimalTweet = ({ tweet }) => {
   const { author, content } = tweet
 
