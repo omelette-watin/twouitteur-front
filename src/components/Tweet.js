@@ -63,6 +63,13 @@ const highlightText = (str) => {
     </span>
   )
 }
+export const ToolTip = ({ children }) => {
+  return (
+    <div className="absolute -bottom-7 -right-7 hidden rounded bg-gray-700/80 py-1 px-2 text-xs text-white shadow-sm group-hover:block">
+      {children}
+    </div>
+  )
+}
 const Tweet = ({ tweet }) => {
   const { user, setUser } = useAppContext()
   const { setTweetModal } = useTweetModal()
@@ -157,15 +164,16 @@ const Tweet = ({ tweet }) => {
           <div className="whitespace-pre-wrap">{highlightText(content)}</div>
           <div className="mt-2 flex items-center space-x-4 text-xs text-[#71767b] sm:space-x-24 lg:text-sm">
             <div
-              className="hover:text-twitter group flex cursor-pointer items-center space-x-1 transition ease-in-out"
+              className="hover:text-twitter group relative flex cursor-pointer items-center space-x-1 transition ease-in-out"
               onClick={handleReply}
             >
               <AnnotationIcon className="group-hover:bg-twitter/10 h-8 rounded-full p-2 transition ease-in-out lg:h-9" />
               <span>{_count.responses}</span>
+              <ToolTip>Reply</ToolTip>
             </div>
             <div
               className={classNames(
-                "group flex cursor-pointer items-center space-x-1 transition ease-in-out hover:text-green-500",
+                "group relative flex cursor-pointer items-center space-x-1 transition ease-in-out hover:text-green-500",
                 {
                   "text-green-500": isRetweeted,
                 }
@@ -178,10 +186,11 @@ const Tweet = ({ tweet }) => {
                 <ReplyIcon className="h-8 rounded-full p-2 transition ease-in-out group-hover:bg-green-500/10 lg:h-9" />
               )}
               <span>{retweets}</span>
+              <ToolTip>Retweet</ToolTip>
             </div>
             <div
               className={classNames(
-                "group flex cursor-pointer items-center space-x-1 transition ease-in-out hover:text-red-500",
+                "group relative flex cursor-pointer items-center space-x-1 transition ease-in-out hover:text-red-500",
                 {
                   "text-red-500": isLiked,
                 }
@@ -194,6 +203,7 @@ const Tweet = ({ tweet }) => {
                 <HeartIcon className="h-8 rounded-full p-2 transition ease-in-out group-hover:bg-red-500/10 lg:h-9" />
               )}
               <span>{likes}</span>
+              <ToolTip>Like</ToolTip>
             </div>
           </div>
         </div>
