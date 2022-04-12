@@ -14,7 +14,7 @@ import { LogoutIcon } from "@heroicons/react/solid"
 import MobileSidebarLink from "./MobileSidebarLink"
 import TweetBox from "./TweetBox/TweetBox"
 import Feed from "./Feed"
-import { Tweet } from "./Feed"
+import Tweet from "./Tweet"
 import { useTweetPosted } from "./TweetPostedContext"
 
 const FeedWrapper = () => {
