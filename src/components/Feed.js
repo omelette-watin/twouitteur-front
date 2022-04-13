@@ -10,7 +10,7 @@ const Loader = (
   </div>
 )
 const EndMessage = (
-  <div className="mb-20 mt-8 flex w-full justify-center text-gray-400">
+  <div className="mt-8 flex w-full justify-center text-gray-400">
     Nothing else to show for now...
   </div>
 )
@@ -46,7 +46,7 @@ const Feed = () => {
       hasMore={more}
       loader={Loader}
       endMessage={EndMessage}
-      style={{ overflowY: "hidden" }}
+      style={{ overflowY: "hidden", paddingBottom: "80px" }}
     >
       {tweets.length > 0 &&
         tweets.map((tweet) => {
