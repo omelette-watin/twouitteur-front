@@ -141,7 +141,7 @@ const Tweet = ({ tweet }) => {
         </div>
       )}
       <div className="flex items-start space-x-3">
-        <div className="flex-shrink-0">
+        <div className="mt-1 flex-shrink-0">
           <Image
             width={36}
             height={36}
@@ -223,7 +223,7 @@ export const MinimalTweet = ({ tweet }) => {
 
   return (
     <div className="flex items-start space-x-3">
-      <div className="flex-shrink-0">
+      <div className="mt-1 flex-shrink-0">
         <Image
           width={36}
           className="rounded-full"
