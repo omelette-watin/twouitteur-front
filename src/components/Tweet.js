@@ -127,7 +127,7 @@ const Tweet = ({ tweet }) => {
     })
 
   return (
-    <div className="flex flex-col space-y-2 border-b border-gray-700 px-4 py-2 text-sm sm:text-base xl:text-lg">
+    <div className="flex flex-col space-y-2 border-b border-gray-700 px-4 pb-2 pt-3 text-sm sm:text-base xl:text-lg">
       {originalTweet && (
         <div className="mt-2 text-xs text-[#71767b]">
           <p>
@@ -225,11 +225,11 @@ export const MinimalTweet = ({ tweet }) => {
     <div className="flex items-start space-x-3">
       <div className="mt-1 flex-shrink-0">
         <Image
-          width={36}
+          src={author.image}
           className="rounded-full"
+          width={36}
           height={36}
           alt={`${author.username} avatar`}
-          src={author.image}
         />
       </div>
 
