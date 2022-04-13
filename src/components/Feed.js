@@ -40,20 +40,19 @@ const Feed = () => {
   }
 
   return (
-    <div className="scrollbar-hide">
-      <InfiniteScroll
-        next={loadMore}
-        dataLength={tweets.length}
-        hasMore={more}
-        loader={Loader}
-        endMessage={EndMessage}
-      >
-        {tweets.length > 0 &&
-          tweets.map((tweet) => {
-            return <Tweet tweet={tweet} key={tweet.id} />
-          })}
-      </InfiniteScroll>
-    </div>
+    <InfiniteScroll
+      next={loadMore}
+      dataLength={tweets.length}
+      hasMore={more}
+      loader={Loader}
+      endMessage={EndMessage}
+      style={{ overflowY: "hidden" }}
+    >
+      {tweets.length > 0 &&
+        tweets.map((tweet) => {
+          return <Tweet tweet={tweet} key={tweet.id} />
+        })}
+    </InfiniteScroll>
   )
 }
 
