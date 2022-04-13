@@ -136,7 +136,7 @@ const TweetBox = ({ replying }) => {
 
       <p
         className={classNames(
-          "bg-twitter fixed bottom-8 left-1/2 z-50 -translate-x-1/2 transform space-x-3 rounded-lg py-3 px-4 text-white",
+          "bg-twitter fixed bottom-24 left-1/2 z-50 -translate-x-1/2 transform space-x-3 rounded-lg py-3 px-4 text-xs text-white lg:text-base",
           {
             hidden: !newTweetId,
           }
@@ -276,7 +276,7 @@ export const TweetBoxModal = ({ replying }) => {
 
       <p
         className={classNames(
-          "bg-twitter fixed bottom-8 left-1/2 z-50 -translate-x-1/2 transform space-x-3 rounded-lg py-3 px-4 text-white",
+          "bg-twitter fixed bottom-8 left-1/2 z-50 -translate-x-1/2 transform space-x-3 rounded-lg py-3 px-4 text-xs text-white sm:text-base",
           {
             hidden: !newTweetId,
           }

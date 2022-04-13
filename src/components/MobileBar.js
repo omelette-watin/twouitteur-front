@@ -13,7 +13,7 @@ const MobileBar = () => {
     })
 
   return (
-    <div className="fixed bottom-0 right-0 left-0 z-50 flex items-center justify-around border-t border-gray-700 bg-black py-2 sm:hidden">
+    <div className="fixed bottom-0 right-0 left-0 z-40 flex items-center justify-around border-t border-gray-700 bg-black py-2 sm:hidden">
       <SidebarLink text="Home" Icon={HomeIcon} link="/" />
       <SidebarLink text="Explore" Icon={SearchIcon} />
       <SidebarLink text="Notifications" Icon={BellIcon} />
