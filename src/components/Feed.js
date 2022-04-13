@@ -45,6 +45,7 @@ const Feed = () => {
             Nothing else to show for now...
           </div>
         }
+        className="scrollbar-hide"
       >
         {tweets.length > 0 &&
           tweets.map((tweet) => {
