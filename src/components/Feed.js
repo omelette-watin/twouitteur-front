@@ -36,7 +36,7 @@ const Feed = () => {
         dataLength={tweets.length}
         hasMore={more}
         loader={
-          <div className="flex w-full justify-center py-2">
+          <div className="mt-8 flex w-full justify-center">
             <Loading color="#00AAEC" />
           </div>
         }
