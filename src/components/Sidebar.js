@@ -74,8 +74,8 @@ const Sidebar = () => {
           src={user.image}
           alt="Your avatar"
           className="rounded-full bg-gray-300"
-          width={30}
-          height={30}
+          width={36}
+          height={36}
         />
         <div className="hidden leading-5 xl:ml-3 xl:inline ">
           <p className="truncate font-bold xl:max-w-[130px]">
