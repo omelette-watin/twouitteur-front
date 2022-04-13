@@ -1,6 +1,4 @@
 import Image from "next/image"
-import TimeAgo from "javascript-time-ago"
-import en from "javascript-time-ago/locale/en.json"
 import ReactTimeAgo from "react-time-ago"
 import { AnnotationIcon, HeartIcon, ReplyIcon } from "@heroicons/react/outline"
 import {
@@ -14,7 +12,6 @@ import { useAppContext } from "./AppContext"
 import api from "@/services/api"
 import { useTweetModal } from "./TweetModalContext"
 
-TimeAgo.addDefaultLocale(en)
 const TimeStamp = ({ date }) => {
   return (
     <time>
