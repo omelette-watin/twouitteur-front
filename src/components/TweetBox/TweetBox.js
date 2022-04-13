@@ -110,9 +110,9 @@ const TweetBox = ({ replying }) => {
       <div className="flex items-start space-x-3 py-3 scrollbar-hide">
         <div className="mt-3 flex-shrink-0">
           <Image
-            src={user.image || "/default-avatar.svg"}
+            src={user.image}
             alt="Your avatar"
-            className="rounded-full"
+            className="rounded-full bg-gray-300"
             width={36}
             height={36}
           />
@@ -250,9 +250,9 @@ export const TweetBoxModal = ({ replying }) => {
       <div className="flex items-start space-x-3 py-3 scrollbar-hide">
         <div className="mt-3 flex-shrink-0">
           <Image
-            src={user.image || "/default-avatar.svg"}
+            src={user.image}
             alt="Your avatar"
-            className="rounded-full"
+            className="rounded-full bg-gray-300"
             width={36}
             height={36}
           />

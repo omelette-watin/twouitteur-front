@@ -71,9 +71,9 @@ const Sidebar = () => {
       </button>
       <div className="hoverAnimation mt-auto flex items-center justify-center text-[#d9d9d9] xl:ml-24 xl:w-[244px] xl:justify-start">
         <Image
-          src={user.image || "/default-avatar.svg"}
+          src={user.image}
           alt="Your avatar"
-          className="rounded-full"
+          className="rounded-full bg-gray-300"
           width={30}
           height={30}
         />

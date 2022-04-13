@@ -42,9 +42,9 @@ const FeedWrapper = () => {
           ) : (
             <div className="sm:hidden">
               <Image
-                src={user.image || "/default-avatar.svg"}
+                src={user.image}
                 alt="Your avatar"
-                className="h-[33px] w-[33px] rounded-full"
+                className="h-[33px] w-[33px] rounded-full bg-gray-300"
                 width={36}
                 height={36}
                 onClick={handleOpenMobileSidebar}
@@ -76,7 +76,7 @@ const FeedWrapper = () => {
           </div>
           <div className="flex items-center space-x-5">
             <Image
-              src={user.image || "/default-avatar.svg"}
+              src={user.image}
               alt="Your avatar"
               className="rounded-full sm:hidden"
               width={25}

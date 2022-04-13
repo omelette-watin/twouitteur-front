@@ -146,8 +146,8 @@ const Tweet = ({ tweet }) => {
             width={36}
             height={36}
             alt={`${author.username} avatar`}
-            src={author.image || "/default-avatar.svg"}
-            className="rounded-full"
+            src={author.image}
+            className="rounded-full bg-gray-300"
           />
         </div>
         <div className="grow-0 flex-col">
@@ -229,7 +229,7 @@ export const MinimalTweet = ({ tweet }) => {
           className="rounded-full"
           height={36}
           alt={`${author.username} avatar`}
-          src={author.image || "/default-avatar.svg"}
+          src={author.image}
         />
       </div>
 
