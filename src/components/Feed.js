@@ -4,6 +4,16 @@ import { useEffect, useState } from "react"
 import Loading from "./Loading"
 import InfiniteScroll from "react-infinite-scroll-component"
 
+const Loader = (
+  <div className="my-8 flex w-full justify-center">
+    <Loading color="#00AAEC" />
+  </div>
+)
+const EndMessage = (
+  <div className="mb-20 mt-8 flex w-full justify-center text-gray-400">
+    Nothing else to show for now...
+  </div>
+)
 const Feed = () => {
   const [tweets, setTweets] = useState([])
   const [more, setMore] = useState(true)
@@ -35,16 +45,8 @@ const Feed = () => {
         next={loadMore}
         dataLength={tweets.length}
         hasMore={more}
-        loader={
-          <div className="mt-8 flex w-full justify-center">
-            <Loading color="#00AAEC" />
-          </div>
-        }
-        endMessage={
-          <div className="mb-20 flex w-full justify-center py-4 text-gray-400">
-            Nothing else to show for now...
-          </div>
-        }
+        loader={Loader}
+        endMessage={EndMessage}
         className="scrollbar-hide"
       >
         {tweets.length > 0 &&
