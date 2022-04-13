@@ -123,7 +123,7 @@ const Register = () => {
                 >
                   {submitting ? (
                     <span>
-                      Sending ... <Loading color="white" size={5} />
+                      Sending ... <Loading color="white" small />
                     </span>
                   ) : (
                     "Sign-up"

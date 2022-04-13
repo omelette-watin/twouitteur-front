@@ -24,7 +24,7 @@ const Loading = ({ color, small = false }) => {
         <svg
           role="status"
           className={
-            "ml-4 inline h-4 w-4 animate-spin text-gray-200 dark:text-gray-600"
+            "ml-4 inline h-6 w-6 animate-spin text-gray-200 dark:text-gray-600"
           }
           viewBox="0 0 100 101"
           fill="none"
