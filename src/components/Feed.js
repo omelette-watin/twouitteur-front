@@ -41,7 +41,7 @@ const Feed = () => {
           </div>
         }
         endMessage={
-          <div className="flex w-full justify-center py-4 text-gray-400">
+          <div className="mb-20 flex w-full justify-center py-4 text-gray-400">
             Nothing else to show for now...
           </div>
         }
