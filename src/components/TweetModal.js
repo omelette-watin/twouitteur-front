@@ -18,7 +18,7 @@ const TweetModal = () => {
           <XIcon color="white" height={20} width={20} />
         </button>
         {tweetModal.replying && (
-          <div className="my-4 px-3">
+          <div className="my-4 px-4">
             <MinimalTweet tweet={tweetModal.replying.tweet} />
           </div>
         )}
