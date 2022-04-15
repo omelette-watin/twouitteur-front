@@ -16,7 +16,7 @@ const EndMessage = (
 const Feed = ({ initialFeed, loadMoreFeed, search }) => {
   const [tweets, setTweets] = useState([])
   const [hasMore, setHasMore] = useState(true)
-  const [initialLoading, setInitalLoading] = useState(true)
+  const [initialLoading, setInitalLoading] = useState()
 
   useEffect(() => {
     initialFeed(setTweets, setHasMore, setInitalLoading)
@@ -25,6 +25,7 @@ const Feed = ({ initialFeed, loadMoreFeed, search }) => {
       setTweets([])
       setInitalLoading(true)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
   const loadMore = () => {

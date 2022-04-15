@@ -4,9 +4,12 @@ import { useTweetPosted } from "@/components/TweetPostedContext"
 import Tweet from "@/components/Tweet"
 import Feed from "@/components/Feed"
 import api from "@/services/api"
+import { useEffect } from "react"
+import { useRouter } from "next/router"
 
 const Home = () => {
-  const { tweetsPosted } = useTweetPosted()
+  const { tweetsPosted, setTweetsPosted } = useTweetPosted()
+  const router = useRouter()
   const loadMoreFeed = async (setTweets, setHasMore, lastId) => {
     const url = `/tweet/feed${lastId ? `?cursor=${lastId}` : ""}`
 
@@ -31,6 +34,10 @@ const Home = () => {
       setLoading(false)
     })
   }
+
+  useEffect(() => {
+    setTweetsPosted([])
+  }, [router])
 
   return (
     <MainWrapper title={"Home"}>
