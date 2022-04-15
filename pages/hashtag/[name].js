@@ -4,27 +4,38 @@ import api from "@/services/api"
 
 const Hashtag = ({ hashtag }) => {
   const baseUrl = "/tweet/hashtag"
-  const getHashtagFeed = async (setTweets, setHasMore, lastId) => {
-    const url = `${baseUrl}/${hashtag}?order=popular&${
-      lastId ? `cursor=${lastId}` : ""
-    }`
+  const loadMoreHashtagFeed = async (setTweets, setHasMore, lastId) => {
+    const url = `${baseUrl}/${hashtag}?order=popular&cursor=${lastId}`
 
     api.get(url).then(({ data }) => {
       if (data.length) {
-        if (!lastId) {
-          setTweets(data)
-        } else {
-          setTweets((prevTweets) => prevTweets.concat(data))
-        }
+        setTweets((prevTweets) => prevTweets.concat(data))
       } else {
         setHasMore(false)
       }
     })
   }
+  const initialFeed = async (setTweets, setHasMore, setLoading) => {
+    const url = `${baseUrl}/${hashtag}?order=popular`
+
+    api.get(url).then(({ data }) => {
+      if (data.length) {
+        setTweets(data)
+      } else {
+        setHasMore(false)
+      }
+
+      setLoading(false)
+    })
+  }
 
   return (
     <MainWrapper title={`#${hashtag}`}>
-      <Feed feedFunction={getHashtagFeed} search={`#${hashtag}`} />
+      <Feed
+        loadMoreFeed={loadMoreHashtagFeed}
+        initialFeed={initialFeed}
+        search={`#${hashtag}`}
+      />
     </MainWrapper>
   )
 }

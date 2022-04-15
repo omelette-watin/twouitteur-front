@@ -13,20 +13,23 @@ const EndMessage = (
     Nothing else to show for now...
   </div>
 )
-const Feed = ({ feedFunction, search }) => {
+const Feed = ({ initialFeed, loadMoreFeed, search }) => {
   const [tweets, setTweets] = useState([])
   const [hasMore, setHasMore] = useState(true)
   const [initialLoading, setInitalLoading] = useState(true)
 
   useEffect(() => {
-    setInitalLoading(true)
-    feedFunction(setTweets, setHasMore)
-    setInitalLoading(false)
-  }, [feedFunction])
+    initialFeed(setTweets, setHasMore, setInitalLoading)
+
+    return () => {
+      setTweets([])
+      setInitalLoading(true)
+    }
+  }, [search])
 
   const loadMore = () => {
     const lastId = tweets[tweets.length - 1]?.incId
-    feedFunction(setTweets, setHasMore, lastId)
+    loadMoreFeed(setTweets, setHasMore, lastId)
   }
 
   return (
@@ -38,11 +41,7 @@ const Feed = ({ feedFunction, search }) => {
       endMessage={tweets.length !== 0 ? EndMessage : null}
       style={{ overflowY: "hidden", paddingBottom: "80px" }}
     >
-      {initialLoading && (
-        <div className="my-8 flex w-full justify-center">
-          <Loading color="#00AAEC" />
-        </div>
-      )}
+      {initialLoading && Loader}
       {tweets.length > 0 &&
         tweets.map((tweet) => {
           return <Tweet tweet={tweet} key={tweet.id} />
