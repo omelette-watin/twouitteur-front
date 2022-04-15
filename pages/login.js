@@ -9,9 +9,11 @@ import { Formik, Form } from "formik"
 import { object, string } from "yup"
 import { Input } from "./register"
 import { useRouter } from "next/router"
+import { useAppContext } from "@/components/AppContext"
 
 const Login = () => {
   const [submitting, setSubmitting] = useState(false)
+  const { setUser } = useAppContext()
   const router = useRouter()
 
   return (
@@ -40,9 +42,16 @@ const Login = () => {
             setSubmitting(true)
             api
               .post("auth/login", values)
-              .then(({ data }) => {
-                const token = data.token
+              .then(async (res) => {
+                const token = res.data.token
                 localStorage.setItem("token", token)
+
+                api.defaults.headers["x-access-token"] = token
+
+                const { data } = await api.get("/user/me")
+
+                setUser(data)
+
                 router.push("/")
               })
               .catch((err) => {

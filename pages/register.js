@@ -9,6 +9,7 @@ import Head from "next/head"
 import api from "@/services/api"
 import classNames from "classnames"
 import { useRouter } from "next/router"
+import { useAppContext } from "@/components/AppContext"
 
 const registerSchema = object({
   username: string()
@@ -43,6 +44,7 @@ const registerSchema = object({
 })
 const Register = () => {
   const [submitting, setSubmitting] = useState(false)
+  const { setUser } = useAppContext()
   const router = useRouter()
 
   return (
@@ -69,9 +71,16 @@ const Register = () => {
             setSubmitting(true)
             api
               .post("auth/register", values)
-              .then(({ data }) => {
-                const token = data.token
+              .then(async (res) => {
+                const token = res.data.token
                 localStorage.setItem("token", token)
+                api.defaults.headers["x-access-token"] = token
+
+                const { data } = await api.get("/user/me")
+
+                setUser(data)
+
+                router.push("/")
                 router.push("/")
               })
               .catch((err) => {
