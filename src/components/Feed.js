@@ -10,7 +10,7 @@ const Loader = (
   </div>
 )
 const EndMessage = (
-  <div className="mt-8 flex w-full justify-center text-gray-400">
+  <div className="mt-8 flex w-full justify-center text-xs text-gray-400 sm:text-base">
     Nothing else to show for now...
   </div>
 )
