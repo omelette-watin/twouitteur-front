@@ -55,10 +55,9 @@ const Login = () => {
                 router.push("/")
               })
               .catch((err) => {
-                if (err.response && err.response.data.message) {
+                if (err.response && err.response.data.credentials) {
                   setErrors({
-                    username: err.response.data.message,
-                    password: err.response.data.message,
+                    credentials: err.response.data.credentials,
                   })
                 } else {
                   setErrors({ server: true })
@@ -78,6 +77,13 @@ const Login = () => {
                 />
                 <Input type="password" name="password" placeholder="Password" />
               </div>
+              {errors.credentials && (
+                <div className="space-between bounce ml-1 -mt-1 flex w-48 items-center xl:w-72">
+                  <p aria-live="polite" className="text-sm text-orange-500">
+                    {errors.credentials}
+                  </p>
+                </div>
+              )}
               {errors.server && (
                 <div className="space-between bounce ml-1 -mt-1 flex w-48 items-center xl:w-72">
                   <p aria-live="polite" className="text-sm text-orange-500">
