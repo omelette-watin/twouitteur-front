@@ -16,7 +16,7 @@ const EndMessage = (
 const Feed = ({ initialFeed, loadMoreFeed, search }) => {
   const [tweets, setTweets] = useState([])
   const [hasMore, setHasMore] = useState(true)
-  const [initialLoading, setInitalLoading] = useState()
+  const [initialLoading, setInitalLoading] = useState(true)
 
   useEffect(() => {
     initialFeed(setTweets, setHasMore, setInitalLoading)
