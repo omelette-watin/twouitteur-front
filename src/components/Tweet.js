@@ -226,7 +226,7 @@ export const MinimalTweet = ({ tweet }) => {
       <div className="mt-1 flex-shrink-0">
         <Image
           src={author.image}
-          className="rounded-full"
+          className="rounded-full bg-gray-300"
           width={36}
           height={36}
           alt={`${author.username} avatar`}
