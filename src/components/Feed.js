@@ -1,4 +1,3 @@
-import api from "@/services/api"
 import Tweet from "./Tweet"
 import { useEffect, useState } from "react"
 import Loading from "./Loading"
@@ -14,36 +13,24 @@ const EndMessage = (
     Nothing else to show for now...
   </div>
 )
-const Feed = () => {
+const Feed = ({ feedFunction }) => {
   const [tweets, setTweets] = useState([])
-  const [more, setMore] = useState(true)
+  const [hasMore, setHasMore] = useState(true)
 
   useEffect(() => {
-    api.get("/tweet/feed").then(({ data }) => {
-      if (data.length) {
-        setTweets(data)
-      } else {
-        setMore(false)
-      }
-    })
+    feedFunction(setTweets, setHasMore)
   }, [])
 
   const loadMore = () => {
     const lastId = tweets[tweets.length - 1].incId
-    api.get(`/tweet/feed?cursor=${lastId}`).then(({ data }) => {
-      if (data.length) {
-        setTweets(tweets.concat(data))
-      } else {
-        setMore(false)
-      }
-    })
+    feedFunction(setTweets, setHasMore, lastId)
   }
 
   return (
     <InfiniteScroll
       next={loadMore}
       dataLength={tweets.length}
-      hasMore={more}
+      hasMore={hasMore}
       loader={Loader}
       endMessage={EndMessage}
       style={{ overflowY: "hidden", paddingBottom: "80px" }}
