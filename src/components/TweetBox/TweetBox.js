@@ -9,7 +9,6 @@ import { useRef, useState, useEffect } from "react"
 import PrivacyPicker from "./PrivacyPicker"
 import MediaBar from "./MediaBar"
 import { useTweetModal } from "../TweetModalContext"
-import classNames from "classnames"
 import { useTweetPosted } from "../TweetPostedContext"
 import Link from "next/link"
 
@@ -18,8 +17,7 @@ const TweetBox = ({ replying }) => {
   const { tweetModal, setTweetModal } = useTweetModal()
   const { user } = useAppContext()
   const [submitting, setSubmitting] = useState(false)
-  const { setTweetsPosted } = useTweetPosted()
-  const [newTweetId, setNewTweetId] = useState("")
+  const { setTweetsPosted, setNewTweetId } = useTweetPosted()
   const editor = useRef()
   const onSubmit = async (state) => {
     setSubmitting(true)
@@ -133,20 +131,6 @@ const TweetBox = ({ replying }) => {
           </div>
         </Form>
       </div>
-
-      <p
-        className={classNames(
-          "bg-twitter fixed bottom-24 left-1/2 z-50 -translate-x-1/2 transform space-x-3 rounded-lg py-3 px-4 text-xs text-white sm:bottom-8 lg:text-base",
-          {
-            hidden: !newTweetId,
-          }
-        )}
-      >
-        <span>Your tweet was sent.</span>
-        <Link href={`/status/${newTweetId}`}>
-          <a className="font-bold hover:underline">View</a>
-        </Link>
-      </p>
     </div>
   )
 }
@@ -154,8 +138,7 @@ export const TweetBoxModal = ({ replying }) => {
   const { tweetModal, setTweetModal } = useTweetModal()
   const { user } = useAppContext()
   const [submitting, setSubmitting] = useState(false)
-  const { setTweetsPosted } = useTweetPosted()
-  const [newTweetId, setNewTweetId] = useState("")
+  const { setTweetsPosted, setNewTweetId } = useTweetPosted()
   const editor = useRef()
   const onSubmit = async (state) => {
     setSubmitting(true)
@@ -273,20 +256,6 @@ export const TweetBoxModal = ({ replying }) => {
           </div>
         </Form>
       </div>
-
-      <p
-        className={classNames(
-          "bg-twitter fixed bottom-8 left-1/2 z-50 -translate-x-1/2 transform space-x-3 rounded-lg py-3 px-4 text-xs text-white sm:text-base",
-          {
-            hidden: !newTweetId,
-          }
-        )}
-      >
-        <span>Your tweet was sent.</span>
-        <Link href={`/status/${newTweetId}`}>
-          <a className="font-bold hover:underline">View</a>
-        </Link>
-      </p>
     </div>
   )
 }

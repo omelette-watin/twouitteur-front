@@ -6,11 +6,12 @@ export const useTweetPosted = () => useContext(TweetPostedContext)
 
 export const TweetPostedProvider = (props) => {
   const [tweetsPosted, setTweetsPosted] = useState([])
+  const [newTweetId, setNewTweetId] = useState("")
 
   return (
     <TweetPostedContext.Provider
       {...props}
-      value={{ tweetsPosted, setTweetsPosted }}
+      value={{ tweetsPosted, setTweetsPosted, newTweetId, setNewTweetId }}
     />
   )
 }
