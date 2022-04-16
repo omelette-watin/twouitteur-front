@@ -1,5 +1,4 @@
 import Image from "next/image"
-import ReactTimeAgo from "react-time-ago"
 import { AnnotationIcon, HeartIcon, ReplyIcon } from "@heroicons/react/outline"
 import {
   HeartIcon as HeartIconSolid,
@@ -11,14 +10,8 @@ import { useState } from "react"
 import { useAppContext } from "./AppContext"
 import api from "@/services/api"
 import { useTweetModal } from "./TweetModalContext"
+import Date from "./Date"
 
-const TimeStamp = ({ date }) => {
-  return (
-    <time>
-      <ReactTimeAgo date={date} locale="en-US" timeStyle="twitter" />
-    </time>
-  )
-}
 const highlightText = (str) => {
   const parts = str.split(
     /\B([#|@][0-9A-Za-zÀ-ÖØ-öø-ÿ_-]+)(?![0-9A-Za-zÀ-ÖØ-öø-ÿ_-])/g
@@ -163,7 +156,7 @@ const Tweet = ({ tweet }) => {
               <Link href={`/${author.username}`}>
                 <a>@{author.username}</a>
               </Link>{" "}
-              · <TimeStamp date={tweet.createdAt} />
+              · <Date date={tweet.createdAt} />
             </span>
           </div>
           <div className="whitespace-pre-wrap">{highlightText(content)}</div>
@@ -246,7 +239,7 @@ export const MinimalTweet = ({ tweet }) => {
             <Link href={`/${author.username}`}>
               <a>@{author.username}</a>
             </Link>{" "}
-            · <TimeStamp date={tweet.createdAt} />
+            · <Date date={tweet.createdAt} />
           </p>
         </div>
         <div className="whitespace-pre-wrap">{highlightText(content)}</div>
