@@ -7,6 +7,7 @@ import { TweetModalProvider } from "@/components/TweetModalContext"
 import { TweetPostedProvider } from "@/components/TweetPostedContext"
 import TimeAgo from "javascript-time-ago"
 import en from "javascript-time-ago/locale/en.json"
+import { EditProfileProvider } from "@/components/EditProfileContext"
 
 TimeAgo.setDefaultLocale(en.locale)
 TimeAgo.addLocale(en)
@@ -29,9 +30,11 @@ const AppContent = ({ Component, pageProps, ...otherProps }) => {
   return (
     <TweetPostedProvider>
       <TweetModalProvider>
-        <Layout title={pageProps.title}>
-          <Component {...pageProps} {...otherProps} />
-        </Layout>
+        <EditProfileProvider>
+          <Layout title={pageProps.title}>
+            <Component {...pageProps} {...otherProps} />
+          </Layout>
+        </EditProfileProvider>
       </TweetModalProvider>
     </TweetPostedProvider>
   )

@@ -6,10 +6,13 @@ import TweetModal from "./TweetModal"
 import classNames from "classnames"
 import { useTweetPosted } from "./TweetPostedContext"
 import Link from "next/link"
+import { useEditProfile } from "./EditProfileContext"
+import EditProfileModal from "./EditProfileModal"
 
 const Layout = ({ title, children }) => {
   const { tweetModal } = useTweetModal()
   const { newTweetId } = useTweetPosted()
+  const { editModal } = useEditProfile()
 
   return (
     <>
@@ -17,6 +20,7 @@ const Layout = ({ title, children }) => {
         <title>{title ? `${title} / ` : ""}Twouitteur </title>
       </Head>
       {tweetModal.visible && <TweetModal />}
+      {editModal && <EditProfileModal />}
       <main className="mx-auto flex min-h-screen max-w-[1500px]">
         <Sidebar />
         <MobileBar />
