@@ -22,7 +22,7 @@ const Layout = ({ title, children }) => {
         <MobileBar />
         <p
           className={classNames(
-            "bg-twitter fixed bottom-24 left-1/2 z-50 -translate-x-1/2 transform space-x-3 rounded-lg py-3 px-4 text-xs text-white sm:bottom-8 lg:text-base",
+            "bg-twitter fixed bottom-24 left-1/2 z-50 w-fit -translate-x-1/2 transform space-x-3 rounded-lg py-3 px-4 text-xs text-white shadow-sm shadow-black/90 sm:bottom-8 lg:text-base",
             {
               hidden: !newTweetId,
             }
