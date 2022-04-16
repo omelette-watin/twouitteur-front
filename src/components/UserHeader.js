@@ -63,6 +63,7 @@ const UserHeader = ({ user }) => {
               {
                 "border border-white bg-transparent hover:border-red-600 hover:bg-red-600/10 hover:text-red-600":
                   isFollowed,
+                "animate-pulse": following,
               }
             )}
             onClick={handleFollow}
