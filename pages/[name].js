@@ -1,12 +1,16 @@
 import MainWrapper from "@/components/MainWrapper"
 import api from "@/services/api"
 import UserHeader from "@/components/UserHeader"
+import UserFeed from "@/components/UserFeed"
 
 const User = ({ user }) => {
   return (
     <MainWrapper title={user?.profilename || "Profile"}>
       {user ? (
-        <UserHeader user={user} />
+        <>
+          <UserHeader user={user} />
+          <UserFeed user={user} />
+        </>
       ) : (
         <div className="p-8 text-center text-gray-400">
           This account doesn't exist...

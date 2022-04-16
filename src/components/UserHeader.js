@@ -11,7 +11,6 @@ const UserHeader = ({ user }) => {
   const { user: currentUser, setUser } = useAppContext()
   const [followersCount, setFollowersCount] = useState(stats.followers)
   const isFollowed = currentUser.following.includes(user.id)
-
   const [following, setFollowing] = useState(false)
   const handleFollow = () => {
     setFollowing(true)
