@@ -29,6 +29,7 @@ const Hashtag = ({ hashtag }) => {
     api.get(url).then(({ data }) => {
       if (data.length) {
         setTweets(data)
+        setHasMore(true)
       } else {
         setHasMore(false)
       }
@@ -49,13 +50,14 @@ const Hashtag = ({ hashtag }) => {
           <Loading color="#00AAEC" />
         </div>
       )}
-      <Scroller
-        loadMore={loadMore}
-        hasMore={hasMore}
-        tweets={tweets}
-        endMessage={`#${hashtag}`}
-        search={`#${hashtag}`}
-      />
+      {tweets.length === 0 && !loading && (
+        <div className="mt-8 flex w-full justify-center text-xs text-gray-400 sm:text-base">
+          No result for #{hashtag} ...
+        </div>
+      )}
+      {tweets.length > 0 && (
+        <Scroller loadMore={loadMore} hasMore={hasMore} tweets={tweets} />
+      )}
     </MainWrapper>
   )
 }

@@ -57,12 +57,19 @@ const Home = () => {
           <Loading color="#00AAEC" />
         </div>
       )}
-      <Scroller
-        tweets={tweets}
-        loadMore={loadMore}
-        hasMore={hasMore}
-        search={"Your feed"}
-      />
+      {tweets.length === 0 && !loading && (
+        <div className="mt-8 flex w-full justify-center text-xs text-gray-400 sm:text-base">
+          No results ...
+        </div>
+      )}
+      {tweets.length > 0 && (
+        <Scroller
+          tweets={tweets}
+          loadMore={loadMore}
+          hasMore={hasMore}
+          search={"Your feed"}
+        />
+      )}
     </MainWrapper>
   )
 }
