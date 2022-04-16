@@ -2,29 +2,33 @@ import MainWrapper from "@/components/MainWrapper"
 import TweetBox from "@/components/TweetBox/TweetBox"
 import { useTweetPosted } from "@/components/TweetPostedContext"
 import Tweet from "@/components/Tweet"
-import Feed from "@/components/Feed"
 import api from "@/services/api"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
+import Scroller from "@/components/Scroller"
+import Loading from "@/components/Loading"
 
 const Home = () => {
   const { tweetsPosted, setTweetsPosted } = useTweetPosted()
   const router = useRouter()
-  const loadMoreFeed = async (setTweets, setHasMore, lastId) => {
-    const url = `/tweet/feed${lastId ? `?cursor=${lastId}` : ""}`
+  const [loading, setLoading] = useState(true)
+  const [tweets, setTweets] = useState([])
+  const [hasMore, setHasMore] = useState(true)
+  const loadMore = async () => {
+    const lastId = tweets[tweets.length - 1]?.incId
+    const url = `/tweet/feed?cursor=${lastId}`
 
     api.get(url).then(({ data }) => {
       if (data.length) {
-        setTweets((prevTweets) => prevTweets.concat(data))
+        setTweets(tweets.concat(data))
       } else {
         setHasMore(false)
       }
     })
   }
-  const initialFeed = async (setTweets, setHasMore, setLoading) => {
-    const url = "/tweet/feed"
 
-    api.get(url).then(({ data }) => {
+  useEffect(() => {
+    api.get("/tweet/feed").then(({ data }) => {
       if (data.length) {
         setTweets(data)
       } else {
@@ -33,11 +37,11 @@ const Home = () => {
 
       setLoading(false)
     })
-  }
+  }, [router])
 
   useEffect(() => {
     setTweetsPosted([])
-  }, [router])
+  }, [router, setTweetsPosted])
 
   return (
     <MainWrapper title={"Home"}>
@@ -48,10 +52,16 @@ const Home = () => {
         tweetsPosted.map((tweet) => {
           return <Tweet tweet={tweet} key={tweet.id} />
         })}
-      <Feed
-        loadMoreFeed={loadMoreFeed}
-        initialFeed={initialFeed}
-        search={"your feed"}
+      {loading && (
+        <div className="my-8 flex w-full justify-center">
+          <Loading color="#00AAEC" />
+        </div>
+      )}
+      <Scroller
+        tweets={tweets}
+        loadMore={loadMore}
+        hasMore={hasMore}
+        search={"Your feed"}
       />
     </MainWrapper>
   )

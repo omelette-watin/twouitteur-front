@@ -1,23 +1,31 @@
-import Feed from "@/components/Feed"
 import MainWrapper from "@/components/MainWrapper"
+import Scroller from "@/components/Scroller"
 import api from "@/services/api"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/router"
+import Loading from "@/components/Loading"
 
 const Hashtag = ({ hashtag }) => {
+  const router = useRouter()
+  const [loading, setLoading] = useState(true)
+  const [tweets, setTweets] = useState([])
+  const [hasMore, setHasMore] = useState(true)
   const baseUrl = "/tweet/hashtag"
-  const loadMoreHashtagFeed = async (setTweets, setHasMore, lastId) => {
+  const loadMore = async () => {
+    const lastId = tweets[tweets.length - 1]?.incId
     const url = `${baseUrl}/${hashtag}?order=popular&cursor=${lastId}`
 
     api.get(url).then(({ data }) => {
       if (data.length) {
-        setTweets((prevTweets) => prevTweets.concat(data))
+        setTweets(tweets.concat(data))
       } else {
         setHasMore(false)
       }
     })
   }
-  const initialFeed = async (setTweets, setHasMore, setLoading) => {
-    const url = `${baseUrl}/${hashtag}?order=popular`
 
+  useEffect(() => {
+    const url = `${baseUrl}/${hashtag}?order=popular`
     api.get(url).then(({ data }) => {
       if (data.length) {
         setTweets(data)
@@ -27,13 +35,25 @@ const Hashtag = ({ hashtag }) => {
 
       setLoading(false)
     })
-  }
+
+    return () => {
+      setTweets([])
+      setLoading(true)
+    }
+  }, [router, hashtag])
 
   return (
     <MainWrapper title={`#${hashtag}`}>
-      <Feed
-        loadMoreFeed={loadMoreHashtagFeed}
-        initialFeed={initialFeed}
+      {loading && (
+        <div className="my-8 flex w-full justify-center">
+          <Loading color="#00AAEC" />
+        </div>
+      )}
+      <Scroller
+        loadMore={loadMore}
+        hasMore={hasMore}
+        tweets={tweets}
+        endMessage={`#${hashtag}`}
         search={`#${hashtag}`}
       />
     </MainWrapper>
