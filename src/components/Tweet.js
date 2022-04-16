@@ -64,8 +64,8 @@ const Tweet = ({ tweet }) => {
   const { user, setUser } = useAppContext()
   const { setTweetModal } = useTweetModal()
   const { author, _count, content, originalTweet } = tweet
-  const [likes, setLikes] = useState(_count.likes)
-  const [retweets, setRetweets] = useState(_count.retweets)
+  const [likesCount, setLikesCount] = useState(_count.likes)
+  const [retweetsCount, setRetweetsCount] = useState(_count.retweets)
   const [liking, setLiking] = useState(false)
   const [retweeting, setRetweeting] = useState(false)
   const isLiked = user.likes.includes(tweet.id)
@@ -74,13 +74,13 @@ const Tweet = ({ tweet }) => {
     setLiking(true)
     api.post(`/tweet/${tweet.id}/like`).then(() => {
       if (isLiked) {
-        setLikes(likes - 1)
+        setLikesCount(likesCount - 1)
         setUser({
           ...user,
           likes: user.likes.filter((like) => like !== tweet.id),
         })
       } else {
-        setLikes(likes + 1)
+        setLikesCount(likesCount + 1)
         setUser({
           ...user,
           likes: user.likes.concat(tweet.id),
@@ -94,13 +94,13 @@ const Tweet = ({ tweet }) => {
     setRetweeting(true)
     api.post(`/tweet/${tweet.id}/retweet`).then(() => {
       if (isRetweeted) {
-        setRetweets(retweets - 1)
+        setRetweetsCount(retweetsCount - 1)
         setUser({
           ...user,
           retweets: user.retweets.filter((retweet) => retweet !== tweet.id),
         })
       } else {
-        setRetweets(retweets + 1)
+        setRetweetsCount(retweetsCount + 1)
         setUser({
           ...user,
           retweets: user.retweets.concat(tweet.id),
@@ -184,7 +184,7 @@ const Tweet = ({ tweet }) => {
               ) : (
                 <ReplyIcon className="h-8 rounded-full p-2 transition ease-in-out group-hover:bg-green-500/10 lg:h-9" />
               )}
-              <span>{retweets}</span>
+              <span>{retweetsCount}</span>
               <ToolTip>Retweet</ToolTip>
             </button>
             <button
@@ -202,7 +202,7 @@ const Tweet = ({ tweet }) => {
               ) : (
                 <HeartIcon className="h-8 rounded-full p-2 transition ease-in-out group-hover:bg-red-500/10 lg:h-9" />
               )}
-              <span>{likes}</span>
+              <span>{likesCount}</span>
               <ToolTip>Like</ToolTip>
             </button>
           </div>
