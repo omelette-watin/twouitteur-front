@@ -1,9 +1,40 @@
 import Image from "next/image"
 import { CalendarIcon } from "@heroicons/react/solid"
 import Date from "./Date"
+import { useAppContext } from "./AppContext"
+import { useState } from "react"
+import api from "@/services/api"
+import classNames from "classnames"
 
 const UserHeader = ({ user }) => {
   const { username, profilename, image, bio, stats, joined } = user
+  const { user: currentUser, setUser } = useAppContext()
+  const [followersCount, setFollowersCount] = useState(stats.followers)
+  const isFollowed = currentUser.following.includes(user.id)
+
+  const [following, setFollowing] = useState(false)
+  const handleFollow = () => {
+    setFollowing(true)
+    api.post(`/user/${user.id}/follow`).then(() => {
+      if (isFollowed) {
+        setFollowersCount(followersCount - 1)
+        setUser({
+          ...currentUser,
+          following: currentUser.following.filter(
+            (follow) => follow !== user.id
+          ),
+        })
+      } else {
+        setFollowersCount(followersCount + 1)
+        setUser({
+          ...currentUser,
+          following: currentUser.following.concat(user.id),
+        })
+      }
+
+      setFollowing(false)
+    })
+  }
 
   return (
     <div className="flex w-full flex-col items-start space-y-8 border-b border-gray-700 py-4 px-5">
@@ -27,8 +58,18 @@ const UserHeader = ({ user }) => {
               @{username}
             </p>
           </div>
-          <button className="bg-twitter rounded-full px-5 py-1 text-white transition ease-in-out hover:bg-[#1a8cd8]">
-            Follow
+          <button
+            className={classNames(
+              "bg-twitter rounded-full px-5 py-1 text-white transition ease-in-out hover:bg-[#1a8cd8]",
+              {
+                "border border-white bg-transparent hover:border-red-600 hover:bg-red-600/10 hover:text-red-600":
+                  isFollowed,
+              }
+            )}
+            onClick={handleFollow}
+            disabled={following}
+          >
+            {isFollowed ? "Unfollow" : "Follow"}
           </button>
         </div>
       </div>
@@ -41,7 +82,7 @@ const UserHeader = ({ user }) => {
           Following
         </div>
         <div className="mr-6">
-          <span className="font-bold text-white">{stats.followers}</span>{" "}
+          <span className="font-bold text-white">{followersCount}</span>{" "}
           Followers
         </div>
         <div className="mr-6">
