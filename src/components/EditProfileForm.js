@@ -145,7 +145,6 @@ const EditProfileForm = () => {
         />
         <div className="flex items-center justify-center space-x-4 pt-8 text-lg">
           <button
-            type="submit"
             className="w-fit self-center rounded-full border px-6 py-1 hover:border-red-600 hover:bg-red-600/10 hover:text-red-600"
             onClick={handleCloseModal}
           >
