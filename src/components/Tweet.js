@@ -1,5 +1,10 @@
 import Image from "next/image"
-import { AnnotationIcon, HeartIcon, ReplyIcon } from "@heroicons/react/outline"
+import {
+  AnnotationIcon,
+  HeartIcon,
+  ReplyIcon,
+  ShareIcon,
+} from "@heroicons/react/outline"
 import {
   HeartIcon as HeartIconSolid,
   ReplyIcon as ReplyIconSolid,
@@ -55,7 +60,7 @@ const highlightText = (str) => {
 }
 export const ToolTip = ({ children }) => {
   return (
-    <div className="absolute -bottom-7 -right-7 hidden rounded bg-gray-700/80 py-1 px-2 text-xs text-white shadow-sm group-hover:block">
+    <div className="absolute -bottom-7 -right-7 hidden w-max rounded bg-gray-700/80 py-1 px-2 text-xs text-white shadow-sm group-hover:block">
       {children}
     </div>
   )
@@ -66,6 +71,7 @@ const Tweet = ({ tweet }) => {
   const { author, _count, content, originalTweet } = tweet
   const [likesCount, setLikesCount] = useState(_count.likes)
   const [retweetsCount, setRetweetsCount] = useState(_count.retweets)
+  const [copied, setCopied] = useState(false)
   const [liking, setLiking] = useState(false)
   const [retweeting, setRetweeting] = useState(false)
   const isLiked = user.likes.includes(tweet.id)
@@ -118,6 +124,13 @@ const Tweet = ({ tweet }) => {
         tweet,
       },
     })
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(
+      `https://twouitteur.vercel.app/status/${tweet.id}`
+    )
+    setCopied(true)
+    setTimeout(() => setCopied(false), 3000)
+  }
 
   return (
     <div className="flex flex-col space-y-2 border-b border-gray-700 px-4 pb-2 pt-3 text-sm sm:text-base xl:text-lg">
@@ -160,7 +173,7 @@ const Tweet = ({ tweet }) => {
             </span>
           </div>
           <div className="whitespace-pre-wrap">{highlightText(content)}</div>
-          <div className="mt-2 flex items-center space-x-4 text-xs text-[#71767b] sm:space-x-24 lg:text-sm">
+          <div className="mt-2 flex items-center space-x-8 text-xs text-[#71767b] sm:space-x-24 lg:text-sm">
             <div
               className="hover:text-twitter group relative flex cursor-pointer items-center space-x-1 transition ease-in-out"
               onClick={handleReply}
@@ -204,6 +217,17 @@ const Tweet = ({ tweet }) => {
               )}
               <span>{likesCount}</span>
               <ToolTip>Like</ToolTip>
+            </button>
+            <button
+              className="hover:text-twitter group relative flex cursor-pointer items-center space-x-1 transition ease-in-out"
+              onClick={handleCopyLink}
+            >
+              {copied ? (
+                <span className="text-twitter">Copied !</span>
+              ) : (
+                <ShareIcon className="group-hover:bg-twitter/10 h-8 rounded-full p-2 transition ease-in-out lg:h-9" />
+              )}
+              <ToolTip>Copy link</ToolTip>
             </button>
           </div>
         </div>
