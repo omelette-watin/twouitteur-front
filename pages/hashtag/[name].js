@@ -13,7 +13,7 @@ const Hashtag = ({ hashtag }) => {
   const baseUrl = "/tweet/hashtag"
   const loadMore = async () => {
     const lastId = tweets[tweets.length - 1]?.incId
-    const url = `${baseUrl}/${hashtag}?order=popular&cursor=${lastId}`
+    const url = `${baseUrl}/${hashtag}?order=latest&cursor=${lastId}`
 
     api.get(url).then(({ data }) => {
       if (data.length) {
@@ -25,7 +25,7 @@ const Hashtag = ({ hashtag }) => {
   }
 
   useEffect(() => {
-    const url = `${baseUrl}/${hashtag}?order=popular`
+    const url = `${baseUrl}/${hashtag}?order=latest`
     api.get(url).then(({ data }) => {
       if (data.length) {
         setTweets(data)

@@ -11,7 +11,6 @@ const Scroller = ({
   loadMore,
   tweets,
   hasMore,
-  search,
   endMessage = "Nothing else to show for now...",
 }) => {
   const EndMessage = (
@@ -36,11 +35,6 @@ const Scroller = ({
         tweets.map((tweet) => {
           return <Tweet tweet={tweet} key={tweet.id} />
         })}
-      {tweets.length === 0 && !hasMore && (
-        <div className="mt-8 flex w-full justify-center text-xs text-gray-400 sm:text-base">
-          No result for {search}
-        </div>
-      )}
     </InfiniteScroll>
   )
 }
