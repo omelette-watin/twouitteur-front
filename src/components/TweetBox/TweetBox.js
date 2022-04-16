@@ -115,7 +115,7 @@ const TweetBox = ({ replying }) => {
             height={36}
           />
         </div>
-        <Form className="z-4 w-full" onSubmit={onSubmit}>
+        <Form className="w-[90%]" onSubmit={onSubmit}>
           <WhatsHappeningBar
             ref={editor}
             maxChars={MAX_CHARS_ALLOWED}
@@ -240,7 +240,7 @@ export const TweetBoxModal = ({ replying }) => {
             height={36}
           />
         </div>
-        <Form className="z-4 w-full" onSubmit={onSubmit}>
+        <Form className="w-full" onSubmit={onSubmit}>
           <WhatsHappeningBar
             ref={editor}
             maxChars={MAX_CHARS_ALLOWED}
