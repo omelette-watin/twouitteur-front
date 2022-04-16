@@ -28,7 +28,7 @@ const AvatarPicker = ({ onAvatarClick, close }) => {
   }, [])
 
   return (
-    <div className="absolute -left-8 right-0 -top-10 z-10 h-[100vh] w-[100vw] rounded-md border-white bg-black p-3 shadow-gray-500 sm:left-0 sm:h-fit sm:w-fit sm:border sm:shadow-sm">
+    <div className="absolute -left-8 right-0 -top-10 z-10 min-h-[100vh] w-[100vw] rounded-md border-white bg-black p-3 shadow-gray-500 sm:left-0 sm:min-h-fit sm:w-fit sm:border sm:shadow-sm">
       <button
         onClick={close}
         className="self-start rounded-full p-2 hover:bg-[#d9d9d9] hover:bg-opacity-10"
