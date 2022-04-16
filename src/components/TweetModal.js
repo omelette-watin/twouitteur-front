@@ -10,7 +10,7 @@ const TweetModal = () => {
 
   return (
     <div className="fixed z-30 flex h-screen w-screen items-start justify-center bg-black sm:bg-black/70 sm:pt-24">
-      <div className="z-10 flex w-full flex-col rounded-xl border-white bg-black p-4 text-white shadow-neutral-800 sm:w-[600px] sm:border-[1px] sm:shadow-lg xl:w-[700px]">
+      <div className="z-10 flex w-full max-w-[100vw] flex-col rounded-xl border-white bg-black p-4 text-white shadow-neutral-800 sm:w-[600px] sm:border-[1px] sm:shadow-lg xl:w-[700px]">
         <button
           onClick={handleCloseTweetModal}
           className="self-start rounded-full p-2  hover:bg-[#d9d9d9] hover:bg-opacity-10"
