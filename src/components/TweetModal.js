@@ -2,11 +2,20 @@ import { TweetBoxModal } from "./TweetBox/TweetBox"
 import { useTweetModal } from "./TweetModalContext"
 import { XIcon } from "@heroicons/react/outline"
 import { MinimalTweet } from "./Tweet"
+import { useEffect } from "react"
 
 const TweetModal = () => {
   const { tweetModal, setTweetModal } = useTweetModal()
   const handleCloseTweetModal = () =>
     setTweetModal({ replying: false, visible: false })
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden"
+
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [])
 
   return (
     <div className="fixed z-30 flex h-screen w-screen items-start justify-center bg-black sm:bg-black/70 sm:pt-24">

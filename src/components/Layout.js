@@ -21,7 +21,7 @@ const Layout = ({ title, children }) => {
       </Head>
       {tweetModal.visible && <TweetModal />}
       {editModal && <EditProfileModal />}
-      <main className="mx-auto flex min-h-screen max-w-[1500px]">
+      <main className="mx-auto flex min-h-screen max-w-[1500px]" id="main">
         <Sidebar />
         <MobileBar />
         <p
