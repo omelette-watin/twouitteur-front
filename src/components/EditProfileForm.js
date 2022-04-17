@@ -3,12 +3,13 @@ import { useState, useEffect } from "react"
 import { useEditProfile } from "./EditProfileContext"
 import api from "@/services/api"
 import Image from "next/image"
-import { CameraIcon } from "@heroicons/react/outline"
+import { CameraIcon, CheckIcon } from "@heroicons/react/outline"
 import { XIcon } from "@heroicons/react/solid"
+import classNames from "classnames"
 
 const PROFILENAME_MAX_CHAR = 30
 const BIO_MAX_CHAR = 160
-const AvatarPicker = ({ onAvatarClick, close }) => {
+const AvatarPicker = ({ onAvatarClick, current, close }) => {
   const [avatars, setAvatars] = useState([])
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const AvatarPicker = ({ onAvatarClick, close }) => {
   }, [])
 
   return (
-    <div className="absolute -left-8 right-0 -top-10 z-10 w-[100vw] rounded-md border-white bg-black p-3 shadow-gray-500 sm:left-0 sm:min-h-fit sm:w-fit sm:border sm:shadow-sm">
+    <div className="fixed inset-0 z-10 w-[100vw] overflow-y-scroll overscroll-contain rounded-md border-white bg-black p-4 pb-16 shadow-gray-500 sm:absolute sm:left-0 sm:min-h-fit sm:w-fit sm:overflow-y-auto sm:border sm:pb-4 sm:shadow-sm">
       <button
         onClick={close}
         className="self-start rounded-full p-2 hover:bg-[#d9d9d9] hover:bg-opacity-10"
@@ -36,16 +37,26 @@ const AvatarPicker = ({ onAvatarClick, close }) => {
         <XIcon color="white" height={20} width={20} />
       </button>
       <p className="pt-3 pl-2">Please choose an avatar :</p>
-      <div className="flex flex-wrap justify-center py-3 pl-3">
-        {avatars.length &&
+      <div className="flex flex-wrap justify-center py-3">
+        {avatars.length > 0 &&
           avatars.map((avatar, i) => {
             return (
               <div
                 key={i}
-                className="hover:border-twitter my-2 mr-3 h-[50px] w-[50px] rounded-full border-4 transition-none ease-in-out hover:scale-125"
+                className="hover:border-twitter group relative my-2 mr-3 h-[50px] w-[50px] rounded-full border-4 transition-none ease-in-out hover:scale-125"
                 onClick={() => onAvatarClick(i + 1)}
               >
                 {avatar}
+                <div
+                  className={classNames(
+                    "group-hover:border-twitter border-twitter absolute top-1/2 left-1/2  flex h-[50px] w-[50px] -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full border-4 bg-neutral-700/40 group-hover:flex",
+                    {
+                      "hidden border-white": current !== `/avatars/${i}.svg`,
+                    }
+                  )}
+                >
+                  <CheckIcon height={25} />
+                </div>
               </div>
             )
           })}
@@ -95,7 +106,7 @@ const EditProfileForm = () => {
         <div className="relative">
           <div
             onClick={() => setShowAvatarPicker(true)}
-            className="hover:border-twitter group relative h-[100px] w-[100px] rounded-full border-4 sm:h-[150px] sm:w-[150px]"
+            className="group relative h-[100px] w-[100px] rounded-full border-4 sm:h-[150px] sm:w-[150px]"
           >
             <Image
               src={image}
@@ -104,7 +115,7 @@ const EditProfileForm = () => {
               className="rounded-full bg-gray-300"
               alt="Votre avatar"
             />
-            <div className="absolute top-1/2 left-1/2 flex h-[100px] w-[100px] -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full bg-neutral-700/70 sm:h-[150px] sm:w-[150px]">
+            <div className="group-hover:border-twitter absolute top-1/2 left-1/2 flex h-[100px] w-[100px] -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full border-4 bg-neutral-700/70 sm:h-[150px] sm:w-[150px]">
               <CameraIcon height={50} />
             </div>
           </div>
@@ -113,6 +124,7 @@ const EditProfileForm = () => {
             <AvatarPicker
               onAvatarClick={handleChangeAvatar}
               close={handleCloseAvatarPicker}
+              current={image}
             />
           )}
         </div>

@@ -250,8 +250,8 @@ export const MinimalTweet = ({ tweet }) => {
         />
       </div>
 
-      <div className="w-full flex-col">
-        <div className="flex items-center space-x-1">
+      <div className="w-full flex-col space-y-2">
+        <div className="flex flex-wrap items-center space-x-1">
           <p className="font-extrabold">
             <Link href={`/${author.username}`}>
               <a className="underline-offset-1 hover:underline">

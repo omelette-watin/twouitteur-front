@@ -18,7 +18,7 @@ const TweetModal = () => {
   }, [])
 
   return (
-    <div className="fixed z-30 flex h-screen w-screen items-start justify-center bg-black sm:bg-black/70 sm:pt-24">
+    <div className="fixed inset-0 z-30 flex w-screen items-start justify-center overflow-y-scroll overscroll-contain bg-black pb-16 sm:bg-black/70 sm:pt-24">
       <div className="z-10 flex w-full max-w-[100vw] flex-col rounded-xl border-white bg-black p-4 text-white shadow-neutral-800 sm:w-[600px] sm:border-[1px] sm:shadow-lg xl:w-[700px]">
         <button
           onClick={handleCloseTweetModal}

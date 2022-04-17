@@ -18,8 +18,8 @@ const EditProfileModal = () => {
   }, [])
 
   return (
-    <div className="fixed z-50 flex h-fit min-h-[140vh] w-screen items-start justify-center overflow-y-scroll bg-black sm:min-h-screen sm:bg-black/70 sm:pt-24">
-      <div className="z-10 flex min-h-screen w-full max-w-[100vw] flex-col border-white bg-black p-4 text-white shadow-neutral-800 sm:min-h-fit sm:w-[600px] sm:rounded-xl sm:border-[1px] sm:shadow-lg xl:w-[700px]">
+    <div className="fixed inset-0 z-50 flex w-screen items-start justify-center overflow-y-scroll overscroll-contain bg-black pb-16 sm:bg-black/70 sm:pt-24">
+      <div className="z-10 flex w-full max-w-[100vw] flex-col border-white bg-black p-4 text-white shadow-neutral-800 sm:min-h-fit sm:w-[600px] sm:rounded-xl sm:border-[1px] sm:shadow-lg xl:w-[700px]">
         <button
           onClick={handleCloseEditModal}
           className="self-start rounded-full p-2  hover:bg-[#d9d9d9] hover:bg-opacity-10"
