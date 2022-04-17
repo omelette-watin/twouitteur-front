@@ -10,10 +10,9 @@ const SidebarLink = ({ Icon, text, active, link = "/" }) => {
           className={classNames(
             "hoverAnimation flex items-center justify-center space-x-3 text-xl text-[#d9d9d9] xl:justify-start",
             {
-              "font-bold": active
+              "bg-[#d9d9d9]/10 font-bold ": active,
             }
           )}
-
         >
           <Icon className="h-7" />
           <span className="hidden xl:inline">{text}</span>

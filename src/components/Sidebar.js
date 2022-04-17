@@ -12,15 +12,13 @@ import {
 } from "@heroicons/react/outline"
 import { useAppContext } from "./AppContext"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { useTweetModal } from "./TweetModalContext"
 
 const Sidebar = () => {
   const { user } = useAppContext()
   const { setTweetModal } = useTweetModal()
-  const router = useRouter()
   const isActive = (pathname) => {
-    return router.pathname.startsWith(pathname)
+    return window.location.pathname === pathname
   }
   const handleOpenTweetModal = () =>
     setTweetModal({
@@ -45,7 +43,12 @@ const Sidebar = () => {
         <SidebarLink text="Messages" Icon={InboxIcon} />
         <SidebarLink text="Bookmarks" Icon={BookmarkIcon} />
         <SidebarLink text="Lists" Icon={ClipboardListIcon} />
-        <SidebarLink text="Profile" Icon={UserIcon} />
+        <SidebarLink
+          text="Profile"
+          Icon={UserIcon}
+          link={`/${user.username}`}
+          active={isActive(`/${user.username}`)}
+        />
         <SidebarLink text="More" Icon={DotsCircleHorizontalIcon} />
       </div>
       <button
