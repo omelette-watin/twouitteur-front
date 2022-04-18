@@ -138,7 +138,7 @@ const Tweet = ({ tweet }) => {
         <div className="mt-2 text-xs text-[#71767b]">
           <p>
             Replying to{" "}
-            <Link href={`/user/${originalTweet.author.username}`}>
+            <Link href={`/${originalTweet.author.username}`}>
               <a className="text-twitter underline-offset-1 hover:underline">
                 @{originalTweet.author.username}
               </a>
@@ -148,13 +148,17 @@ const Tweet = ({ tweet }) => {
       )}
       <div className="flex items-start space-x-3">
         <div className="mt-1 flex-shrink-0">
-          <Image
-            width={36}
-            height={36}
-            alt={`${author.username} avatar`}
-            src={author.image}
-            className="rounded-full bg-gray-300"
-          />
+          <Link href={`/${author.username}`}>
+            <a>
+              <Image
+                width={36}
+                height={36}
+                alt={`${author.username} avatar`}
+                src={author.image}
+                className="rounded-full bg-gray-300"
+              />
+            </a>
+          </Link>
         </div>
         <div className="w-[90%] grow-0 flex-col">
           <div className="space-x-1">
