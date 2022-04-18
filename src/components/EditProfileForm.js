@@ -29,7 +29,7 @@ const AvatarPicker = ({ onAvatarClick, current, close }) => {
   }, [])
 
   return (
-    <div className="fixed inset-0 z-10 w-[100vw] overflow-y-scroll overscroll-contain rounded-md border-white bg-black p-4 pb-16 shadow-gray-500 sm:absolute sm:left-0 sm:min-h-fit sm:w-fit sm:overflow-y-auto sm:border sm:pb-4 sm:shadow-sm">
+    <div className="fixed inset-0 z-10 w-[100vw] overflow-y-scroll overscroll-contain rounded-md border-white bg-black p-4 pb-16 shadow-gray-500 sm:absolute sm:left-0 sm:min-h-max sm:w-fit sm:overflow-y-auto sm:border sm:pb-4 sm:shadow-sm">
       <button
         onClick={close}
         className="self-start rounded-full p-2 hover:bg-[#d9d9d9] hover:bg-opacity-10"
@@ -51,7 +51,8 @@ const AvatarPicker = ({ onAvatarClick, current, close }) => {
                   className={classNames(
                     "group-hover:border-twitter border-twitter absolute top-1/2 left-1/2  flex h-[50px] w-[50px] -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full border-4 bg-neutral-700/40 group-hover:flex",
                     {
-                      "hidden border-white": current !== `/avatars/${i}.svg`,
+                      "hidden border-white":
+                        current !== `/avatars/${i + 1}.svg`,
                     }
                   )}
                 >
