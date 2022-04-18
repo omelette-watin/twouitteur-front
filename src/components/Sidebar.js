@@ -29,12 +29,16 @@ const Sidebar = () => {
   return (
     <div className="fixed hidden h-full flex-col items-center p-2 sm:flex xl:w-[340px] xl:items-start">
       <div className="hoverAnimation flex h-14 w-14 items-center justify-center p-0 xl:ml-24">
-        <Image
-          src="/twouitteur-white.svg"
-          width={30}
-          height={30}
-          alt="twouitteur logo"
-        />
+        <Link href={"/"}>
+          <a>
+            <Image
+              src="/twouitteur-white.svg"
+              width={30}
+              height={30}
+              alt="twouitteur logo"
+            />
+          </a>
+        </Link>
       </div>
       <div className="mt-4 mb-2.5 space-y-2 xl:ml-24">
         <SidebarLink text="Home" Icon={HomeIcon} active={isActive("/")} />
