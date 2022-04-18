@@ -16,7 +16,12 @@ import { useAppContext } from "./AppContext"
 import api from "@/services/api"
 import { useTweetModal } from "./TweetModalContext"
 import Date from "./Date"
+import { useRouter } from "next/router"
 
+const stopPropagation = (e) => {
+  e.stopPropagation()
+  e.nativeEvent.stopImmediatePropagation()
+}
 const highlightText = (str) => {
   const parts = str.split(
     /\B([#|@][0-9A-Za-zÀ-ÖØ-öø-ÿ_-]+)(?![0-9A-Za-zÀ-ÖØ-öø-ÿ_-])/g
@@ -47,7 +52,14 @@ const highlightText = (str) => {
                   isHashtag(part) ? "/hashtag" : "/user"
                 }/${part.substring(1)}`}
               >
-                <a className="underline-offset-1 hover:underline">{part}</a>
+                <a
+                  onClick={(e) => {
+                    stopPropagation(e)
+                  }}
+                  className="underline-offset-1 hover:underline"
+                >
+                  {part}
+                </a>
               </Link>
             ) : (
               part
@@ -66,6 +78,7 @@ export const ToolTip = ({ children }) => {
   )
 }
 const Tweet = ({ tweet }) => {
+  const router = useRouter()
   const { user, setUser } = useAppContext()
   const { setTweetModal } = useTweetModal()
   const { author, _count, content, originalTweet } = tweet
@@ -76,7 +89,8 @@ const Tweet = ({ tweet }) => {
   const [retweeting, setRetweeting] = useState(false)
   const isLiked = user.likes.includes(tweet.id)
   const isRetweeted = user.retweets.includes(tweet.id)
-  const handleLike = () => {
+  const handleLike = (e) => {
+    e.stopPropagation()
     setLiking(true)
     api.post(`/tweet/${tweet.id}/like`).then(() => {
       if (isLiked) {
@@ -96,7 +110,8 @@ const Tweet = ({ tweet }) => {
       setLiking(false)
     })
   }
-  const handleRetweet = () => {
+  const handleRetweet = (e) => {
+    e.stopPropagation()
     setRetweeting(true)
     api.post(`/tweet/${tweet.id}/retweet`).then(() => {
       if (isRetweeted) {
@@ -116,7 +131,8 @@ const Tweet = ({ tweet }) => {
       setRetweeting(false)
     })
   }
-  const handleReply = () =>
+  const handleReply = (e) => {
+    e.stopPropagation()
     setTweetModal({
       visible: true,
       replying: {
@@ -124,22 +140,37 @@ const Tweet = ({ tweet }) => {
         tweet,
       },
     })
-  const handleCopyLink = () => {
+  }
+  const handleCopyLink = (e) => {
+    e.stopPropagation()
     navigator.clipboard.writeText(
       `https://twouitteur.vercel.app/status/${tweet.id}`
     )
     setCopied(true)
     setTimeout(() => setCopied(false), 3000)
   }
+  const handleClickOnTweet = () => {
+    if (!window.getSelection().toString()) {
+      router.push(`/status/${tweet.id}`)
+    }
+  }
 
   return (
-    <div className="flex flex-col space-y-2 border-b border-gray-700 px-4 pb-2 pt-3 text-sm sm:text-base xl:text-lg">
+    <div
+      className="relative flex cursor-pointer flex-col space-y-2 border-b border-gray-700 px-4 pb-2 pt-3 text-sm transition ease-in-out hover:bg-neutral-900/50 sm:text-base xl:text-lg"
+      onClick={handleClickOnTweet}
+    >
       {originalTweet && (
-        <div className="mt-2 text-xs text-[#71767b]">
+        <div className="z-10 mt-2 text-xs text-[#71767b]">
           <p>
             Replying to{" "}
             <Link href={`/${originalTweet.author.username}`}>
-              <a className="text-twitter underline-offset-1 hover:underline">
+              <a
+                onClick={(e) => {
+                  stopPropagation(e)
+                }}
+                className="text-twitter underline-offset-1 hover:underline"
+              >
                 @{originalTweet.author.username}
               </a>
             </Link>
@@ -147,7 +178,7 @@ const Tweet = ({ tweet }) => {
         </div>
       )}
       <div className="flex w-full items-start space-x-3 pr-2">
-        <div className="mt-1 flex-shrink-0">
+        <div className=" mt-1 flex-shrink-0">
           <Link href={`/${author.username}`}>
             <a>
               <Image
@@ -160,11 +191,16 @@ const Tweet = ({ tweet }) => {
             </a>
           </Link>
         </div>
-        <div className="w-[90%] grow-0 flex-col">
+        <div className=" w-[90%] grow-0 flex-col">
           <div className="space-x-1">
             <span className="font-extrabold">
               <Link href={`/${author.username}`}>
-                <a className="underline-offset-2 hover:underline">
+                <a
+                  onClick={(e) => {
+                    stopPropagation(e)
+                  }}
+                  className="underline-offset-2 hover:underline"
+                >
                   {author.profilename || author.username}
                 </a>
               </Link>
@@ -179,7 +215,7 @@ const Tweet = ({ tweet }) => {
           <div className="whitespace-pre-wrap break-words">
             {highlightText(content)}
           </div>
-          <div className="mt-2 flex w-full items-center justify-between text-xs text-[#71767b] sm:justify-start sm:space-x-20 lg:text-sm xl:space-x-24">
+          <div className=" mt-2 flex w-full items-center justify-between text-xs text-[#71767b] sm:justify-start sm:space-x-20 lg:text-sm xl:space-x-24">
             <div
               className="hover:text-twitter group relative flex cursor-pointer items-center space-x-1 transition ease-in-out"
               onClick={handleReply}
@@ -260,7 +296,12 @@ export const MinimalTweet = ({ tweet }) => {
         <div className="flex flex-wrap items-center space-x-1">
           <p className="font-extrabold">
             <Link href={`/${author.username}`}>
-              <a className="underline-offset-1 hover:underline">
+              <a
+                onClick={(e) => {
+                  stopPropagation(e)
+                }}
+                className="underline-offset-1 hover:underline"
+              >
                 {author.profilename || author.username}
               </a>
             </Link>
