@@ -156,7 +156,7 @@ const Tweet = ({ tweet }) => {
             className="rounded-full bg-gray-300"
           />
         </div>
-        <div className="w-full grow-0 flex-col">
+        <div className="w-[90%] grow-0 flex-col">
           <div className="space-x-1">
             <span className="font-extrabold">
               <Link href={`/${author.username}`}>
@@ -172,7 +172,9 @@ const Tweet = ({ tweet }) => {
               · <Date date={tweet.createdAt} />
             </span>
           </div>
-          <div className="whitespace-pre-wrap">{highlightText(content)}</div>
+          <div className="whitespace-pre-wrap break-words">
+            {highlightText(content)}
+          </div>
           <div className="mt-2 flex w-full items-center justify-between text-xs text-[#71767b] sm:pr-24 lg:text-sm">
             <div
               className="hover:text-twitter group relative flex cursor-pointer items-center space-x-1 transition ease-in-out"

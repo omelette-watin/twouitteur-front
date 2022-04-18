@@ -90,7 +90,7 @@ const UserHeader = ({ user }) => {
         </div>
       </div>
 
-      <p className="max-w-full truncate whitespace-pre-wrap text-white">
+      <p className="max-w-full whitespace-pre-wrap break-words text-white">
         {isCurrentUserProfile ? (
           <span>{currentUser.bio || "This user has no bio yet ..."}</span>
         ) : (
