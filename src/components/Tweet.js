@@ -146,7 +146,7 @@ const Tweet = ({ tweet }) => {
           </p>
         </div>
       )}
-      <div className="flex items-start space-x-3">
+      <div className="flex w-full items-start space-x-3 pr-2">
         <div className="mt-1 flex-shrink-0">
           <Link href={`/${author.username}`}>
             <a>
@@ -179,7 +179,7 @@ const Tweet = ({ tweet }) => {
           <div className="whitespace-pre-wrap break-words">
             {highlightText(content)}
           </div>
-          <div className="mt-2 flex w-full items-center justify-between text-xs text-[#71767b] sm:pr-24 lg:text-sm">
+          <div className="mt-2 flex w-full items-center justify-between text-xs text-[#71767b] sm:justify-start sm:space-x-20 lg:text-sm xl:space-x-24">
             <div
               className="hover:text-twitter group relative flex cursor-pointer items-center space-x-1 transition ease-in-out"
               onClick={handleReply}
@@ -272,7 +272,9 @@ export const MinimalTweet = ({ tweet }) => {
             · <Date date={tweet.createdAt} />
           </p>
         </div>
-        <div className="whitespace-pre-wrap">{highlightText(content)}</div>
+        <div className="w-[90%] whitespace-pre-wrap break-words">
+          {highlightText(content)}
+        </div>
       </div>
     </div>
   )
