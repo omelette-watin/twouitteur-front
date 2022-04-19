@@ -29,7 +29,7 @@ const Scroller = ({
       style={{
         overflowY: "hidden",
         paddingBottom: "80px",
-        maxWidth: "full",
+        maxWidth: "100vw",
       }}
     >
       {tweets.length > 0 &&
