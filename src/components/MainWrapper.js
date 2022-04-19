@@ -29,7 +29,7 @@ const MainWrapper = ({ title, children }) => {
   )
 
   return (
-    <div className="max-w-[100vw] flex-grow border-gray-700 text-white sm:ml-[73px] sm:max-w-2xl sm:border-l sm:border-r xl:ml-[370px]">
+    <div className="max-w-[100vw] flex-grow border-gray-700 pb-32 text-white sm:ml-[73px] sm:max-w-2xl sm:border-l sm:border-r sm:pb-0 xl:ml-[370px]">
       <div className="sticky top-0 z-20 flex items-center border-b border-gray-700 bg-black py-2 px-4 text-[#d9d9d9] sm:justify-between">
         <div className="flex items-center space-x-4">
           {isHomePage ? (
