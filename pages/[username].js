@@ -22,7 +22,7 @@ const User = ({ user }) => {
 
 export async function getServerSideProps({ params }) {
   const { data: user } = await api
-    .get(`/user/name/${params.name}`)
+    .get(`/user/name/${params.username}`)
     .catch(() => {
       return { data: null }
     })
