@@ -63,10 +63,10 @@ const Status = ({ tweet }) => {
   return (
     <MainWrapper>
       {tweet.originalTweetId && hasMoreOriginals && (
-        <div className="flex w-full justify-center pt-2">
+        <div className="flex w-full justify-center pt-4 pb-2">
           <button
             onClick={loadOriginalTweet}
-            className="rounded-full bg-gray-600 px-4 py-1 underline-offset-2 transition ease-in-out hover:bg-gray-800"
+            className="rounded-full bg-gray-600/50 px-4 py-1 text-xs underline-offset-2 transition ease-in-out hover:bg-gray-800/80 sm:text-sm lg:text-base"
           >
             Show previous tweet
           </button>
