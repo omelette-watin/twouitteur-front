@@ -94,7 +94,7 @@ const TweetBox = ({ replying }) => {
     if (replying) {
       editor.current.focus()
     }
-  }, [replying])
+  }, [])
 
   return (
     <div className="flex flex-col px-4">
@@ -145,7 +145,7 @@ export const TweetBoxModal = ({ replying }) => {
   const { user } = useAppContext()
   const [submitting, setSubmitting] = useState(false)
   const { setTweetsPosted, setNewTweetId } = useTweetPosted()
-  const editor = useRef()
+  const editorModal = useRef()
   const onSubmit = async (state) => {
     setSubmitting(true)
     const {
@@ -157,7 +157,7 @@ export const TweetBoxModal = ({ replying }) => {
       api
         .post("/tweet/", { content: plainText.trim(), postPrivacy })
         .then(({ data }) => {
-          editor.current.reset()
+          editorModal.current.reset()
           const newTweet = {
             ...data.tweet,
             _count: {
@@ -187,7 +187,7 @@ export const TweetBoxModal = ({ replying }) => {
           postPrivacy,
         })
         .then(({ data }) => {
-          editor.current.reset()
+          editorModal.current.reset()
           const newTweet = {
             ...data.tweet,
             _count: {
@@ -218,7 +218,7 @@ export const TweetBoxModal = ({ replying }) => {
   }
 
   useEffect(() => {
-    editor.current.focus()
+    editorModal.current.focus()
   }, [tweetModal])
 
   return (
@@ -248,7 +248,7 @@ export const TweetBoxModal = ({ replying }) => {
         </div>
         <Form className="w-[90%]" onSubmit={onSubmit}>
           <WhatsHappeningBar
-            ref={editor}
+            ref={editorModal}
             maxChars={MAX_CHARS_ALLOWED}
             placeholder={replying ? "Tweet your reply" : "What's happening ?"}
           />
