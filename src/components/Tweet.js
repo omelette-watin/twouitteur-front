@@ -159,7 +159,7 @@ const Tweet = ({ tweet }) => {
 
   return (
     <div
-      className="flex w-full cursor-pointer flex-col space-y-2 border-b border-gray-700 px-4 pb-2 pt-3 text-sm transition ease-in-out hover:bg-neutral-900/50 sm:text-base xl:text-lg"
+      className="flex w-full max-w-[100vw] cursor-pointer flex-col space-y-2 border-b border-gray-700 px-4 pb-2 pt-3 text-sm transition ease-in-out hover:bg-neutral-900/50 sm:text-base xl:text-lg"
       onClick={handleClickOnTweet}
     >
       {originalTweet && (
