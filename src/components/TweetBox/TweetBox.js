@@ -90,12 +90,18 @@ const TweetBox = ({ replying }) => {
     }
   }
 
+  useEffect(() => {
+    if (replying) {
+      editor.current.focus()
+    }
+  }, [replying])
+
   return (
     <div className="flex flex-col px-4">
       {replying && (
-        <div className="flex w-full items-start space-x-3">
+        <div className="flex w-full items-start space-x-6">
           <div className="w-[33px]" />
-          <p className="text-[#71767b]">
+          <p className="text-sm text-[#71767b]">
             Replying to{" "}
             <Link href={`/user/${replying.username}`}>
               <a className="text-twitter underline-offset-1 hover:underline">
