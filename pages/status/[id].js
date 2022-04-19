@@ -13,9 +13,11 @@ const Status = ({ tweet }) => {
   const { tweetsPosted } = useTweetPosted()
   const [loading, setLoading] = useState(true)
   const [tweets, setTweets] = useState([])
+  const [originalTweets, setOriginalTweets] = useState([])
   const [hasMore, setHasMore] = useState(true)
+  const [hasMoreOriginals, setHasMoreOriginals] = useState()
   const baseUrl = `/tweet/${tweet.id}/replies`
-  const loadMore = async () => {
+  const loadMoreReplies = async () => {
     const lastId = tweets[tweets.length - 1]?.incId
     const url = `${baseUrl}/?order=latest&cursor=${lastId}`
 
@@ -25,6 +27,12 @@ const Status = ({ tweet }) => {
       } else {
         setHasMore(false)
       }
+    })
+  }
+  const loadOriginalTweet = async () => {
+    api.get(`/tweet/${hasMoreOriginals}`).then(({ data }) => {
+      setOriginalTweets(originalTweets.concat(data))
+      setHasMoreOriginals(data.originalTweetId)
     })
   }
 
@@ -41,16 +49,38 @@ const Status = ({ tweet }) => {
       })
     }
 
+    setHasMoreOriginals(tweet.originalTweetId)
     setLoading(false)
 
     return () => {
       setTweets([])
+      setHasMoreOriginals()
+      setOriginalTweets([])
       setLoading(true)
     }
   }, [tweet, replies, baseUrl])
 
   return (
     <MainWrapper>
+      {tweet.originalTweetId && hasMoreOriginals && (
+        <div className="flex w-full justify-center pt-2">
+          <button
+            onClick={loadOriginalTweet}
+            className="text-gray-500 underline-offset-2 transition ease-in-out hover:text-white hover:underline"
+          >
+            See original tweet from{" "}
+            <span className="text-twitter">
+              {tweet.originalTweet.author.username}
+            </span>
+          </button>
+        </div>
+      )}
+      {originalTweets.length > 0 &&
+        originalTweets
+          .map((tweet) => {
+            return <Tweet tweet={tweet} key={tweet.id} />
+          })
+          .reverse()}
       <MainTweet tweet={tweet} />
       {tweetsPosted.length > 0 &&
         tweetsPosted
@@ -71,7 +101,11 @@ const Status = ({ tweet }) => {
         </div>
       )}
       {tweets.length > 0 && (
-        <Scroller loadMore={loadMore} hasMore={hasMore} tweets={tweets} />
+        <Scroller
+          loadMore={loadMoreReplies}
+          hasMore={hasMore}
+          tweets={tweets}
+        />
       )}
     </MainWrapper>
   )
