@@ -66,12 +66,9 @@ const Status = ({ tweet }) => {
         <div className="flex w-full justify-center pt-2">
           <button
             onClick={loadOriginalTweet}
-            className="text-gray-500 underline-offset-2 transition ease-in-out hover:text-white hover:underline"
+            className="rounded-full bg-gray-600 px-4 py-1 underline-offset-2 transition ease-in-out hover:bg-gray-800"
           >
-            See original tweet from{" "}
-            <span className="text-twitter">
-              {tweet.originalTweet.author.username}
-            </span>
+            Show previous tweet
           </button>
         </div>
       )}
