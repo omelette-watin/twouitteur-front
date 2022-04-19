@@ -193,7 +193,7 @@ const Tweet = ({ tweet }) => {
             </a>
           </Link>
         </div>
-        <div className="w-[80%] grow-0 flex-col sm:w-[90%]">
+        <div className="w-[85%] grow-0 flex-col sm:w-[90%]">
           <div className="space-x-1">
             <span className="font-extrabold">
               <Link href={`/${author.username}`}>
@@ -448,10 +448,8 @@ export const MainTweet = ({ tweet }) => {
             </p>
           </div>
         )}
-        <div className="w-[90%] grow-0 flex-col">
-          <div className="max-w-full whitespace-pre-wrap break-words text-xl sm:text-2xl">
-            {highlightText(content)}
-          </div>
+        <div className="max-w-full whitespace-pre-wrap break-words text-xl sm:text-2xl">
+          {highlightText(content)}
         </div>
         <div className="w-full border-b border-gray-700 pb-4 text-[#71767b]">
           <FullDate date={tweet.createdAt} full />
