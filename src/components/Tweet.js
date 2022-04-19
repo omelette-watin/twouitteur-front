@@ -214,7 +214,7 @@ const Tweet = ({ tweet }) => {
               · <Date date={tweet.createdAt} />
             </span>
           </div>
-          <div className="whitespace-pre-wrap break-words">
+          <div className="max-w-full whitespace-pre-wrap break-words">
             {highlightText(content)}
           </div>
           <div className="mt-2 flex w-full items-center justify-between text-xs text-[#71767b] sm:justify-start sm:space-x-20 lg:text-sm xl:space-x-24">
@@ -315,7 +315,7 @@ export const MinimalTweet = ({ tweet }) => {
             · <Date date={tweet.createdAt} />
           </p>
         </div>
-        <div className="w-[90%] whitespace-pre-wrap break-words">
+        <div className="w-[90%] max-w-full whitespace-pre-wrap break-words">
           {highlightText(content)}
         </div>
       </div>
@@ -449,7 +449,7 @@ export const MainTweet = ({ tweet }) => {
           </div>
         )}
         <div className="w-[90%] grow-0 flex-col">
-          <div className="whitespace-pre-wrap break-words text-xl sm:text-2xl">
+          <div className="max-w-full whitespace-pre-wrap break-words text-xl sm:text-2xl">
             {highlightText(content)}
           </div>
         </div>
